@@ -6,6 +6,8 @@ Leaforg is a platform that focuses on providing an innovative solution for respo
 
 [![Watch the video](https://github.com/brayton-anderson/Leaforg-app/blob/main/assets/images/eco_not_ego.jpg)](https://youtu.be/-xN4dRDWAt4)
 
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
+
 ## Solution Details
 
 The [Call for Code 2021](https://developer.ibm.com/callforcode/) Global Challenge asked teams of developers, designers, data scientists and business analysts to build solutions that significantly improve preparedness for natural disasters and accelerate relief when they hit. We answered the call and we have developed a solution that aims to raise environmental awareness by positively change people’s behavior to recycle more.
