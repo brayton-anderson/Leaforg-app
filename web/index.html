@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+  -->
+    <base href="/" />
+
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="description" content="Leaforg® is a non-profit global marketplace for recycled materials and products. We are spearheading the effort to connect worldwide demand for sustainable materials with reputable providers.">
+    <meta name="author" content="Leaforg® | Brayton Anderson">  
+    <meta
+      name="google-signin-client_id"
+      content="513117853955-gum85j53oclrv2fijmfp2cr6ofcumhgd.apps.googleusercontent.com.apps.googleusercontent.com"
+    />
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="leaforgapp" />
+    <link rel="apple-touch-icon" href="app_icon.png" />
+
+    <title>leaforgapp</title>
+    <link rel="manifest" href="manifest.json" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
+
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme.css">
+    <!-- Firebase Configuration-->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("/firebase-messaging-sw.js");
+        });
+      }
+    </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>  -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-database.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBgtNyeALQx8cuerCs6nFB4fQKzLL8r474",
+        authDomain: "leaforg-8c873.firebaseapp.com",
+        databaseURL: "https://leaforg-8c873.firebaseio.com",
+        projectId: "leaforg-8c873",
+        storageBucket: "leaforg-8c873.appspot.com",
+        messagingSenderId: "256127547159",
+        appId: "1:256127547159:web:db035049167ff40b692952",
+        measurementId: "G-8QX3DELFCQ",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // firebase.analytics();
+    </script>
+    <script>
+      window.watsonAssistantChatOptions = {
+        integrationID: "00f30c22-dd02-4f2b-9de9-7b03fdb734bf", // The ID of this integration.
+        region: "eu-gb", // The region your integration is hosted in.
+        serviceInstanceID: "15369298-01e0-45d8-8da2-846cf2eabd2d", // The ID of your service instance.
+        onLoad: function (instance) {
+          instance.render();
+        },
+      };
+      setTimeout(function () {
+        const t = document.createElement("script");
+        t.src =
+          "https://web-chat.global.assistant.watson.appdomain.cloud/loadWatsonAssistantChat.js";
+        document.head.appendChild(t);
+      });
+    </script>
+    <!-- End of Firebase Configuration-->
+  </head>
+  <body>
+    <html>
+      <body>
+        <header class="header">	    
+          <div class="branding">
+              <div class="container-fluid position-relative py-3">
+                  <div class="logo-wrapper">
+                    <div class="site-logo"><a class="navbar-brand" href="index.html"><img class="logo-icon me-2"   src="assets/images/leaforg_mobile_rgreen_icon.png" alt="logo" ><span class="logo-text">Leaforg</span></a></div>    
+                  </div><!--//docs-logo-wrapper-->
+            
+              </div><!--//container-->
+          </div><!--//branding-->
+      </header><!--//header-->
+      
+      <section class="hero-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-7 pt-5 mb-5 align-self-center">
+              <div class="promo pe-md-3 pe-lg-5">
+                <h1 class="headline mb-3">
+                  Welcome to Leaforg,<br>Buy, Share &amp; Sell Green Products  
+                </h1><!--//headline-->
+                <div class="subheadline mb-4">
+                  Leaforg® is a non-profit global marketplace for recycled materials and products. We are spearheading the effort to connect worldwide demand for sustainable materials with reputable providers.
+                  
+                </div><!--//subheading-->
+                
+                <div class="cta-holder row gx-md-3 gy-3 gy-md-0">
+                  
+                  <div class="col-12 col-md-auto">
+                      <a class="btn btn-secondary scrollto w-100" href="#benefits-section">Leaforg is initializing... Please wait..</a>
+                  </div>
+                </div><!--//cta-holder-->
+                
+               
+              </div><!--//promo-->
+            </div><!--col-->
+            <div class="col-12 col-md-5 mb-5 align-self-center">
+              <div class="book-cover-holder">
+                <img class="img-fluid book-cover" src="assets/images/devbook-cover.png" alt="book cover" >
+                <!-- <div class="book-badge d-inline-block shadow">
+                  Save<br>Earth
+                </div> -->
+              </div><!--//book-cover-holder-->
+              <!-- <div class="text-center"><a class="theme-link scrollto" href="#reviews-section">See all book reviews</a></div> -->
+            </div><!--col-->
+          </div><!--//row-->
+        </div><!--//container-->
+      </section><!--//hero-section-->
+
+
+
+
+
+
+
+
+
+
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
+    <script src="assets/plugins/smoothscroll.min.js"></script> 
+    
+    <script src="assets/js/main.js"></script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <!--<script src="/__/firebase/8.7.0/firebase-app.js"></script>-->
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+        <!--<script src="/__/firebase/8.7.0/firebase-analytics.js"></script> -->
+
+        <!-- Initialize Firebase -->
+        <!--<script src="/__/firebase/init.js"></script> -->
+        <script src="assets/packages/libphonenumber_plugin/js/libphonenumber.js"></script>
+        <script src="assets/packages/libphonenumber_plugin/js/stringbuffer.js"></script>
+        <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+        <script>
+          var serviceWorkerVersion = null;
+          var scriptLoaded = false;
+          function loadMainDartJs() {
+            if (scriptLoaded) {
+              return;
+            }
+            scriptLoaded = true;
+            var scriptTag = document.createElement("script");
+            scriptTag.src = "main.dart.js";
+            scriptTag.type = "application/javascript";
+            document.body.append(scriptTag);
+          }
+
+          if ("serviceWorker" in navigator) {
+            // Service workers are supported. Use them.
+            window.addEventListener("load", function () {
+              // Wait for registration to finish before dropping the <script> tag.
+              // Otherwise, the browser will load the script multiple times,
+              // potentially different versions.
+              var serviceWorkerUrl =
+                "flutter_service_worker.js?v=" + serviceWorkerVersion;
+              navigator.serviceWorker.register(serviceWorkerUrl).then((reg) => {
+                function waitForActivation(serviceWorker) {
+                  serviceWorker.addEventListener("statechange", () => {
+                    if (serviceWorker.state == "activated") {
+                      console.log("Installed new service worker.");
+                      loadMainDartJs();
+                    }
+                  });
+                }
+                if (!reg.active && (reg.installing || reg.waiting)) {
+                  // No active web worker and we have installed or are installing
+                  // one for the first time. Simply wait for it to activate.
+                  waitForActivation(reg.installing ?? reg.waiting);
+                } else if (
+                  !reg.active.scriptURL.endsWith(serviceWorkerVersion)
+                ) {
+                  // When the app updates the serviceWorkerVersion changes, so we
+                  // need to ask the service worker to update.
+                  console.log("New service worker available.");
+                  reg.update();
+                  waitForActivation(reg.installing);
+                } else {
+                  // Existing service worker is still good.
+                  console.log("Loading app from service worker.");
+                  loadMainDartJs();
+                }
+              });
+
+              // If service worker doesn't succeed in a reasonable amount of time,
+              // fallback to plaint <script> tag.
+              setTimeout(() => {
+                if (!scriptLoaded) {
+                  console.warn(
+                    "Failed to load app from service worker. Falling back to plain <script> tag."
+                  );
+                  loadMainDartJs();
+                }
+              }, 4000);
+            });
+          } else {
+            // Service workers not supported. Just drop the <script> tag.
+            loadMainDartJs();
+          }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF-x3ir05vdWfxX7NjUv6mSWP4FSgEhck"></script>
+      </body>
+    </html>
+  </body>
+</html>
