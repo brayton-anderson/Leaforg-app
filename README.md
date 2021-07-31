@@ -8,7 +8,7 @@ Leaforg is a platform that focuses on providing an innovative solution for respo
 
 ## Solution Details
 
-The [Call for Code 2021](https://developer.ibm.com/callforcode/) Global Challenge asked teams of developers, designers, data scientists and business analysts to build solutions that significantly improve preparedness for natural disasters and accelerate relief when they hit. That year, the team answered the call and we have developed a solution for the many low-literate farmers in mostly developing countries to optimize the use of their limited water supply during times of drought.
+The [Call for Code 2021](https://developer.ibm.com/callforcode/) Global Challenge asked teams of developers, designers, data scientists and business analysts to build solutions that significantly improve preparedness for natural disasters and accelerate relief when they hit. We answered the call and we have developed a solution that aims to raise environmental awareness by positively change people’s behavior to recycle more.
 
 ## 1.Find a recycler: 
 We will help recycling businesses get noticed by adding their contact details to be accessible to users interested in getting rid of products in an environmentally friendly way>through an interactive map. Users can simply insert their addresses and a list of registered and authenticated recyclers gets displayed for users to pick the closest and most convenient option. Recyclers and users can then agree on a pickup time and a place.Though this feature is not ready yet, it is one of the many visions we have for the future.
@@ -52,7 +52,7 @@ The Leaforg solution currently comprises mainly highly visual and easy-to-use we
 4. Implementing messaging feature.
 5. Strengthen Security
 
-The goal of the project is to help....
+The goal of the project is to help more persons become enviromentally friendly by providing them with easy yo use platform that introduces them to quick and simple ways to recycle their products, whether it is through the recycle at home feature to repair them, dispose them responsibly through the find a recycler feature, or selling them to others through our marketplace feature.
 
 Participation is welcomed from software developers, designers, testers, disposal experts, restaurants, repair shops, green products manufactures, and others that can help improve the our environments by coming with solutions to reduce our carbon footprints around the world. 
 
