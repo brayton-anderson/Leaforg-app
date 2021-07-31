@@ -6,7 +6,7 @@ Leaforg is a platform that focuses on providing an innovative solution for respo
 
 [![Watch the video](https://github.com/brayton-anderson/Leaforg-app/blob/main/assets/images/eco_not_ego.jpg)](https://youtu.be/-xN4dRDWAt4)
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/-xN4dRDWAt4)
 
 ## Solution Details
 
