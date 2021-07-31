@@ -30,7 +30,7 @@ Buyers can look up the items they want in the search bar, find the right seller,
 
 #### Leaforg App
 
-Leaforg App is designed and developed for people with a recycing mind, to sell, buy and share recycling ideas in their current location. The app lists user products and posts for viewing and purchase, The app will etch these information from a Backend service hosted on IBM as a micro service.
+Leaforg App is designed and developed for people with a recycing mind, to sell, buy and share recycling ideas in their current location. The app lists user products and posts for viewing and purchase, The app will fetch these information from a Backend service hosted on IBM as a micro service.
 
 #### IBM Cloud Backend Micro Service
 
