@@ -24,7 +24,7 @@ Buyers can look up the items they want in the search bar, find the right seller,
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/brayton-anderson/Leaforg-app/master/assets/images/Leaforg_roadmap1.png" alt="Leaforg App architecture" width ="100%" height="120%">
+  <img src="https://raw.githubusercontent.com/brayton-anderson/Leaforg-app/assets/images/Leaforg_roadmap1.png" alt="Leaforg App architecture" width ="100%" height="120%">
 </p>
 
 
@@ -52,7 +52,7 @@ The Leaforg solution currently comprises mainly highly visual and easy-to-use we
 4. Implementing messaging feature.
 5. Strengthen Security
 
-The goal of the project is to help farmers globally farm their crops with the least amount of water by taking advantage of real-time information that can help improve sustainability and build resiliency to climate change.
+The goal of the project is to help....
 
 Participation is welcomed from software developers, designers, testers, disposal experts, restaurants, repair shops, green products manufactures, and others that can help improve the our environments by coming with solutions to reduce our carbon footprints around the world. 
 
