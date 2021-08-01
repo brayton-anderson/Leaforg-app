@@ -4,9 +4,10 @@
 
 Leaforg is a platform that focuses on providing an innovative solution for responsible production and green consumption problems around the world. Our platform will consist of 3 different categories and solutions:
 
-[![Watch the video](https://github.com/brayton-anderson/Leaforg-app/blob/main/assets/images/eco_not_ego.jpg)](https://youtu.be/-xN4dRDWAt4)
+##Intro video
+This video is 3minutes but youtube made it 3:01minutes.
+[![Watch the video](https://github.com/brayton-anderson/Leaforg-app/blob/main/assets/images/leaf_org_video_overlay.jpg)](https://youtu.be/-xN4dRDWAt4)
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/-xN4dRDWAt4)
 
 ## Solution Details
 
