@@ -1,10 +1,10 @@
 import '../helpers/custom_trace.dart';
-import '../models/cuisine.dart';
+import 'franchise.dart';
 
 class Filter {
   bool delivery;
   bool open;
-  List<Cuisine> cuisines;
+  List<Franchise> cuisines;
 
   Filter();
 
@@ -12,8 +12,8 @@ class Filter {
     try {
       open = jsonMap['open'] ?? false;
       delivery = jsonMap['delivery'] ?? false;
-      cuisines = jsonMap['cuisines'] != null && (jsonMap['cuisines'] as List).length > 0
-          ? List.from(jsonMap['cuisines']).map((element) => Cuisine.fromJSON(element)).toList()
+      cuisines = jsonMap['franchises'] != null && (jsonMap['franchises'] as List).length > 0
+          ? List.from(jsonMap['franchises']).map((element) => Franchise.fromJSON(element)).toList()
           : [];
     } catch (e) {
       print(CustomTrace(StackTrace.current, message: e));
@@ -24,7 +24,7 @@ class Filter {
     var map = new Map<String, dynamic>();
     map['open'] = open;
     map['delivery'] = delivery;
-    map['cuisines'] = cuisines.map((element) => element.toMap()).toList();
+    map['franchises'] = cuisines.map((element) => element.toMap()).toList();
     return map;
   }
 

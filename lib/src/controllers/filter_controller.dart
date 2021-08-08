@@ -7,13 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../generated/l10n.dart';
 import '../models/cart.dart';
-import '../models/cuisine.dart';
+import '../models/franchise.dart';
 import '../models/filter.dart';
-import '../repository/cuisine_repository.dart';
+import '../repository/franchise_repository.dart';
 
 class FilterController extends ControllerMVC {
   GlobalKey<ScaffoldState> scaffoldKey;
-  List<Cuisine> cuisines = [];
+  List<Franchise> cuisines = [];
   Filter filter;
   Cart cart;
 
@@ -43,10 +43,10 @@ class FilterController extends ControllerMVC {
   }
 
   void listenForCuisines({String message}) async {
-    cuisines.add(new Cuisine.fromJSON(
+    cuisines.add(new Franchise.fromJSON(
         {'id': '0', 'name': S.of(Get.context).all, 'selected': true}));
-    final Stream<Cuisine> stream = await getCuisines();
-    stream.listen((Cuisine _cuisine) {
+    final Stream<Franchise> stream = await getCuisines();
+    stream.listen((Franchise _cuisine) {
       setState(() {
         if (filter.cuisines.contains(_cuisine)) {
           _cuisine.selected = true;
@@ -109,7 +109,7 @@ class FilterController extends ControllerMVC {
 
   void resetCuisines() {
     filter.cuisines = [];
-    cuisines.forEach((Cuisine _f) {
+    cuisines.forEach((Franchise _f) {
       _f.selected = false;
     });
     cuisines.elementAt(0).selected = true;

@@ -16,7 +16,7 @@ import '../repository/user_repository.dart';
 
 Future<Stream<Store>> getNearStores(
     Address myLocation, Address areaLocation) async {
-  Uri uri = Helper.getUri('api/restaurants');
+  Uri uri = Helper.getUri('api/stores');
   Map<String, dynamic> _queryParams = {};
   SharedPreferences prefs = await SharedPreferences.getInstance();
   Filter filter =
@@ -50,7 +50,7 @@ Future<Stream<Store>> getNearStores(
 }
 
 Future<Stream<Store>> getPopularStores(Address myLocation) async {
-  Uri uri = Helper.getUri('api/restaurants');
+  Uri uri = Helper.getUri('api/stores');
   Map<String, dynamic> _queryParams = {};
   SharedPreferences prefs = await SharedPreferences.getInstance();
   Filter filter =
@@ -83,7 +83,7 @@ Future<Stream<Store>> getPopularStores(Address myLocation) async {
 }
 
 Future<Stream<Store>> searchStores(String search, Address address) async {
-  Uri uri = Helper.getUri('api/restaurants');
+  Uri uri = Helper.getUri('api/stores');
   Map<String, dynamic> _queryParams = {};
   _queryParams['search'] = 'name:$search;description:$search';
   _queryParams['searchFields'] = 'name:like;description:like';
@@ -114,7 +114,7 @@ Future<Stream<Store>> searchStores(String search, Address address) async {
 }
 
 Future<Stream<Store>> getStore(String id, Address address) async {
-  Uri uri = Helper.getUri('api/restaurants/$id');
+  Uri uri = Helper.getUri('api/stores/$id');
   Map<String, dynamic> _queryParams = {};
   if (!address.isUnknown()) {
     _queryParams['myLon'] = address.longitude.toString();
@@ -140,7 +140,7 @@ Future<Stream<Store>> getStore(String id, Address address) async {
 
 Future<Stream<Review>> getStoreReviews(String id) async {
   final String url =
-      '${GlobalConfiguration().getString('api_base_url')}restaurant_reviews?with=user&search=store_id:$id';
+      '${GlobalConfiguration().getString('api_base_url')}store_reviews?with=user&search=store_id:$id';
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
@@ -161,7 +161,7 @@ Future<Stream<Review>> getStoreReviews(String id) async {
 
 Future<Stream<Review>> getRecentReviews() async {
   final String url =
-      '${GlobalConfiguration().getString('api_base_url')}restaurant_reviews?orderBy=updated_at&sortedBy=desc&limit=3&with=user';
+      '${GlobalConfiguration().getString('api_base_url')}store_reviews?orderBy=updated_at&sortedBy=desc&limit=3&with=user';
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
@@ -181,7 +181,7 @@ Future<Stream<Review>> getRecentReviews() async {
 
 Future<Review> addStoreReview(Review review, Store store) async {
   final String url =
-      '${GlobalConfiguration().getString('api_base_url')}restaurant_reviews';
+      '${GlobalConfiguration().getString('api_base_url')}store_reviews';
   final client = new http.Client();
   review.user = currentUser.value;
   try {

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import '../repository/user_repository.dart';
+import '../bindings/marketplace_binding.dart';
+import '../pages/market_place.dart';
 import '../bindings/create_post_binding.dart';
 import '../widgets/widgets.dart';
 import '../pages/splash_screen.dart';
@@ -27,6 +28,7 @@ class AppPages {
   static const PRODUCT = Routes.PRODUCT;
   static const CATEGORY = Routes.CATEGORY;
   static const CREATEPOST = Routes.CREATEPOST;
+  static const MARKETPLACE = Routes.MARKETPLACE;
 
   static final routes = [
     GetPage(
@@ -44,7 +46,14 @@ class AppPages {
       page: () => CreatePostContainer(),
       binding: CreatePostBinding(),
     ),
+    GetPage(
+      name: _Paths.MARKETPLACE,
+      page: () => MarketPlace(),
+      binding: CreateMarketPlaceBinding(),
+    ),
   ];
+
+  static get keys => null;
 }
 
   // static const DEBG = Routes.DEBUG;

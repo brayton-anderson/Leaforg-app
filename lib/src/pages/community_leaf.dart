@@ -1,13 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import 'package:get/get.dart';
 import '../models/social_models/social_thread.dart';
 import '../repository/community_repositories/posts_thread_repository.dart';
 import '../models/user.dart';
-import '../repository/user_repository.dart';
-import '../soconfig/pallete.dart';
-import '../data/data.dart';
 import '../widgets/widgets.dart';
 
 class CommunityScreen extends StatefulWidget {
@@ -96,16 +92,16 @@ class _HomeScreenMobile extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
           sliver: SliverToBoxAdapter(
-            child: Rooms(onlineUsers: onlineUsers),
+            //child: Rooms(onlineUsers: onlineUsers),
           ),
         ),
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
           sliver: SliverToBoxAdapter(
-            child: Stories(
-              currentUser: currentUserss,
-              stories: stories,
-            ),
+           // child: Stories(
+            //  currentUser: currentUserss,
+           //   stories: stories,
+           // ),
           ),
         ),
       ],
@@ -142,13 +138,13 @@ class _HomeScreenDesktop extends StatelessWidget {
           flex: 2,
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: MoreOptionsList(
-                currentUser: currentUserss,
-                user: null,
-              ),
-            ),
+            //child: Padding(
+            //  padding: const EdgeInsets.all(12.0),
+           //   child: MoreOptionsList(
+            //    currentUser: currentUserss,
+             //   user: null,
+            //  ),
+            //),
           ),
         ),
         const Spacer(),
@@ -348,10 +344,10 @@ class _HomeScreenDesktop extends StatelessWidget {
           flex: 2,
           child: Align(
             alignment: Alignment.centerRight,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: ContactsList(users: onlineUsers),
-            ),
+            // child: Padding(
+            //   padding: const EdgeInsets.all(12.0),
+            //   child: ContactsList(users: Userss),
+            // ),
           ),
         ),
       ],

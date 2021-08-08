@@ -51,12 +51,18 @@ class Product {
               ? jsonMap['price'].toDouble()
               : 0.0;
       description = jsonMap['description'];
+      is_user_product = jsonMap['is_user_product'];
+      user_id = jsonMap['user_id'];
+      main_category = jsonMap['main_category'];
       ingredients = jsonMap['ingredients'];
       weight = jsonMap['weight'] != null ? jsonMap['weight'].toString() : '';
       unit = jsonMap['unit'] != null ? jsonMap['unit'].toString() : '';
       packageItemsCount = jsonMap['package_items_count'].toString();
       featured = jsonMap['featured'] ?? false;
       deliverable = jsonMap['deliverable'] ?? false;
+      userproduct = jsonMap['userproduct'] != null
+          ? UserProduct.fromJSON(jsonMap['userproduct'])
+          : UserProduct.fromJSON({});
       store = jsonMap['restaurant'] != null
           ? Store.fromJSON(jsonMap['restaurant'])
           : Store.fromJSON({});
@@ -100,12 +106,16 @@ class Product {
       price = 0.0;
       discountPrice = 0.0;
       description = '';
+      is_user_product = '';
+      user_id = '';
+      main_category = '';
       weight = '';
       ingredients = '';
       unit = '';
       packageItemsCount = '';
       featured = false;
       deliverable = false;
+      userproduct = UserProduct.fromJSON({});
       store = Store.fromJSON({});
       category = Category.fromJSON({});
       image = new Media();

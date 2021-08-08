@@ -10,7 +10,7 @@ import '../models/slide.dart';
 Future<Stream<Slide>> getSlides() async {
   Uri uri = Helper.getUri('api/slides');
   Map<String, dynamic> _queryParams = {
-    'with': 'food;restaurant',
+    'with': 'product;store',
     'search': 'enabled:1',
     'orderBy': 'order',
     'sortedBy': 'asc',

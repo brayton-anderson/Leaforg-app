@@ -39,7 +39,7 @@ Future<Stream<Category>> getCategories() async {
 
 Future<Stream<Category>> getCategoriesOfStore(String storeId) async {
   Uri uri = Helper.getUri('api/categories');
-  Map<String, dynamic> _queryParams = {'restaurant_id': storeId};
+  Map<String, dynamic> _queryParams = {'store_id': storeId};
 
   uri = uri.replace(queryParameters: _queryParams);
   try {

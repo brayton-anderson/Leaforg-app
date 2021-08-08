@@ -17,7 +17,7 @@ import '../models/user.dart';
 import '../repository/user_repository.dart' as userRepo;
 
 Future<Stream<Product>> getTrendingProducts(Address address) async {
-  Uri uri = Helper.getUri('api/foods');
+  Uri uri = Helper.getUri('api/products');
   Map<String, dynamic> _queryParams = {};
   SharedPreferences prefs = await SharedPreferences.getInstance();
   Filter filter =
@@ -53,10 +53,10 @@ Future<Stream<Product>> getTrendingProducts(Address address) async {
 }
 
 Future<Stream<Product>> getProduct(String productId) async {
-  Uri uri = Helper.getUri('api/foods/$productId');
+  Uri uri = Helper.getUri('api/products/$productId');
   uri = uri.replace(queryParameters: {
     'with':
-        'nutrition;restaurant;category;extras;extraGroups;foodReviews;foodReviews.user'
+        'nutrition;store;category;extras;extraGroups;productReviews;productReviews.user'
   });
   try {
     final client = new http.Client();
@@ -75,7 +75,7 @@ Future<Stream<Product>> getProduct(String productId) async {
 }
 
 Future<Stream<Product>> searchProducts(String search, Address address) async {
-  Uri uri = Helper.getUri('api/foods');
+  Uri uri = Helper.getUri('api/products');
   Map<String, dynamic> _queryParams = {};
   _queryParams['search'] = 'name:$search;description:$search';
   _queryParams['searchFields'] = 'name:like;description:like';
@@ -106,12 +106,12 @@ Future<Stream<Product>> searchProducts(String search, Address address) async {
 }
 
 Future<Stream<Product>> getProductsByCategory(categoryId) async {
-  Uri uri = Helper.getUri('api/foods');
+  Uri uri = Helper.getUri('api/products');
   Map<String, dynamic> _queryParams = {};
   SharedPreferences prefs = await SharedPreferences.getInstance();
   Filter filter =
       Filter.fromJSON(json.decode(prefs.getString('filter') ?? '{}'));
-  _queryParams['with'] = 'restaurant';
+  _queryParams['with'] = 'store';
   _queryParams['search'] = 'category_id:$categoryId';
   _queryParams['searchFields'] = 'category_id:=';
 
@@ -142,7 +142,7 @@ Future<Stream<Favorite>> isFavoriteProduct(String productId) async {
   }
   final String _apiToken = 'api_token=${_user.apiToken}&';
   final String url =
-      '${GlobalConfiguration().getString('api_base_url')}favorites/exist?${_apiToken}food_id=$productId&user_id=${_user.id}';
+      '${GlobalConfiguration().getString('api_base_url')}favorites/exist?${_apiToken}product_id=$productId&user_id=${_user.id}';
   try {
     final client = new http.Client();
     final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
@@ -165,7 +165,7 @@ Future<Stream<Favorite>> getFavorites() async {
   }
   final String _apiToken = 'api_token=${_user.apiToken}&';
   final String url =
-      '${GlobalConfiguration().getString('api_base_url')}favorites?${_apiToken}with=food;user;extras&search=user_id:${_user.id}&searchFields=user_id:=';
+      '${GlobalConfiguration().getString('api_base_url')}favorites?${_apiToken}with=product;user;extras&search=user_id:${_user.id}&searchFields=user_id:=';
 
   final client = new http.Client();
   final streamedRest = await client.send(http.Request('get', Uri.parse(url)));
@@ -228,11 +228,11 @@ Future<Favorite> removeFavorite(Favorite favorite) async {
 
 Future<Stream<Product>> getProductsOfStore(String storeId,
     {List<String> categories}) async {
-  Uri uri = Helper.getUri('api/foods/categories');
+  Uri uri = Helper.getUri('api/products/categories');
   Map<String, dynamic> query = {
-    'with': 'restaurant;category;extras;foodReviews',
-    'search': 'restaurant_id:$storeId',
-    'searchFields': 'restaurant_id:=',
+    'with': 'store;category;extras;productReviews',
+    'search': 'store_id:$storeId',
+    'searchFields': 'store_id:=',
   };
 
   if (categories != null && categories.isNotEmpty) {
@@ -258,11 +258,11 @@ Future<Stream<Product>> getProductsOfStore(String storeId,
 }
 
 Future<Stream<Product>> getTrendingProductsOfStore(String storeId) async {
-  Uri uri = Helper.getUri('api/foods');
+  Uri uri = Helper.getUri('api/products');
   uri = uri.replace(queryParameters: {
-    'with': 'category;extras;foodReviews',
-    'search': 'restaurant_id:$storeId;featured:1',
-    'searchFields': 'restaurant_id:=;featured:=',
+    'with': 'category;extras;productReviews',
+    'search': 'store_id:$storeId;featured:1',
+    'searchFields': 'store_id:=;featured:=',
     'searchJoin': 'and',
   });
   // TODO Trending products only
@@ -285,11 +285,11 @@ Future<Stream<Product>> getTrendingProductsOfStore(String storeId) async {
 }
 
 Future<Stream<Product>> getFeaturedProductsOfStore(String storeId) async {
-  Uri uri = Helper.getUri('api/foods');
+  Uri uri = Helper.getUri('api/products');
   uri = uri.replace(queryParameters: {
-    'with': 'category;extras;foodReviews',
-    'search': 'restaurant_id:$storeId;featured:1',
-    'searchFields': 'restaurant_id:=;featured:=',
+    'with': 'category;extras;productReviews',
+    'search': 'store_id:$storeId;featured:1',
+    'searchFields': 'store_id:=;featured:=',
     'searchJoin': 'and',
   });
   try {
@@ -312,7 +312,7 @@ Future<Stream<Product>> getFeaturedProductsOfStore(String storeId) async {
 
 Future<Review> addProductReview(Review review, Product product) async {
   final String url =
-      '${GlobalConfiguration().getString('api_base_url')}food_reviews';
+      '${GlobalConfiguration().getString('api_base_url')}product_reviews';
   final client = new http.Client();
   review.user = userRepo.currentUser.value;
   try {

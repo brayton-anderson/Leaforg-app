@@ -1,6 +1,5 @@
 // @dart=2.11
 
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -124,6 +123,7 @@ class _MyAppState extends State<MyApp> {
                   navigatorKey: settingRepo.navigatorKey,
                   title: _setting.appName,
                   initialRoute: '/Splash',
+                  //getPages: AppPages.routes,
                   initialBinding: CreateNewtworkBinding(),
                   onGenerateRoute: RouteGenerator.generateRoute,
                   debugShowCheckedModeBanner: false,

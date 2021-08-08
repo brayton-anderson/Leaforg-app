@@ -1,18 +1,11 @@
 import 'dart:io';
 import 'dart:math';
-import 'dart:html' as webhtml;
-
-import 'dart:math' as Math;
-import 'package:image/image.dart' as Im;
-
 import 'package:emoji_chooser/emoji_chooser.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../controllers/community_controlers/compress.dart';
-import 'package:path_provider/path_provider.dart';
 import 'utils.dart';
 import '../../helpers/FBCloudStore.dart';
 import '../../helpers/FBStorage.dart';

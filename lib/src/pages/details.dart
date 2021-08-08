@@ -50,18 +50,10 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
     final ThemeData themeData = Theme.of(context);
     final TextStyle aboutTextStyle =
         themeData.textTheme.bodyText1.copyWith(color: themeData.splashColor);
-    final TextStyle aboutTextStyle2 = themeData.textTheme.headline2
-        .copyWith(color: themeData.scaffoldBackgroundColor);
     final TextStyle linkStyle2 =
         themeData.textTheme.headline4.copyWith(color: themeData.splashColor);
     final TextStyle linkStyle4 =
         themeData.textTheme.headline1.copyWith(color: themeData.hintColor);
-    final TextStyle linkStyle3 = themeData.textTheme.headline3
-        .copyWith(color: themeData.selectedRowColor);
-    final TextStyle footerStyle =
-        themeData.textTheme.caption.copyWith(color: themeData.splashColor);
-    final TextStyle linkStyle =
-        themeData.textTheme.bodyText1.copyWith(color: themeData.primaryColor);
     return Scaffold(
         key: _con.scaffoldKey,
         floatingActionButton: FloatingActionButton.extended(

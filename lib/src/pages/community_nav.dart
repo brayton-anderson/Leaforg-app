@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import '../data/data.dart';
 import '../pages/community_screens.dart';
 import '../widgets/widgets.dart';
 

@@ -53,7 +53,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => LoginWidget());
       case '/Profile':
         return MaterialPageRoute(builder: (_) => ProfileWidget());
-      case '/ForgetPassword':
+      case '/ForgetPassword': 
         return MaterialPageRoute(builder: (_) => ForgetPasswordWidget());
       case '/Pages':
         return MaterialPageRoute(builder: (_) => PagesWidget(currentTab: args));

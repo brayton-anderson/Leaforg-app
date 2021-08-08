@@ -19,6 +19,7 @@ abstract class Routes {
   static const PRODUCT = _Paths.PRODUCT;
   static const CATEGORY = _Paths.CATEGORY;
   static const CREATEPOST = _Paths.CREATEPOST;
+  static const MARKETPLACE = _Paths.MARKETPLACE;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const PRODUCT = '/product';
   static const CATEGORY = '/category';
   static const CREATEPOST = '/createpost';
+  static const MARKETPLACE = '/marketplace';
 }

@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:leaforgapp/src/pages/sorry_page_comming_soon.dart';
-import 'package:leaforgapp/src/repository/user_repository.dart';
+import 'package:leaforgapp/src/pages/market_place.dart';
+import '../pages/sorry_page_comming_soon.dart';
+import '../repository/user_repository.dart';
 import '../pages/community_nav.dart';
 import '../helpers/responsive.dart';
 import '../models/home_subicons.dart';
@@ -44,8 +44,7 @@ class _HomeIconChipsItemState extends State<HomeIconChipsItem> {
                   ? Navigator.of(Get.context).pushReplacementNamed('/Login')
                   : Get.to(() => CommunityNavScreen())
               : widget.homeIconsChips.id == '2'
-                  ? Navigator.of(Get.context)
-                      .pushReplacementNamed('/Pages', arguments: 4)
+                  ? Get.to(() => MarketPlace())
                   : widget.homeIconsChips.id == '3'
                       ? Get.to(() => ComingSoonWidget())
                       : gethomeiconPositions().then((value) {

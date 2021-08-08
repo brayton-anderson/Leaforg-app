@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../data/data.dart';
+import 'package:leaforgapp/src/models/user.dart';
 import '../pages/community/view_stories_page.dart';
 import '../soconfig/pallete.dart';
 import '../models/data_models.dart';
@@ -42,7 +42,7 @@ class Stories extends StatelessWidget {
           final Story story = stories[index - 1];
           return GestureDetector(
               onTap: () => Get.to(() => ViewStoriesPage(
-                    users: onlineUsers,
+                    // users: stories,
                   )),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4.0),
