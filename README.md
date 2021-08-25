@@ -7,7 +7,7 @@ Leaforg is a platform that focuses on providing an innovative solution for respo
 ## Intro video
 
 This video is 3minutes but youtube made it 3:01minutes.
-[![Watch the video](https://github.com/brayton-anderson/Leaforg-app/blob/main/assets/images/leaf_org_video_overlay2.jpg)](https://youtu.be/-xN4dRDWAt4)
+[![Watch the video](https://raw.githubusercontent.com/brayton-anderson/Leaforg-app/main/leaf_org_video_overlay2.jpg)](https://youtu.be/-xN4dRDWAt4)
 
 
 ## Solution Details
