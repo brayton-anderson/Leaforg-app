@@ -28,7 +28,7 @@ Buyers can look up the items they want in the search bar, find the right seller,
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/brayton-anderson/Leaforg-app/main/assets/img/Leaforg_roadmap1.png" alt="Leaforg App architecture" width ="100%" height="120%">
+  <img src="https://raw.githubusercontent.com/brayton-anderson/Leaforg-app/main/Leaforg_roadmap1.png" alt="Leaforg App architecture" width ="100%" height="120%">
 </p>
 
 
