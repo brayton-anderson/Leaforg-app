@@ -4,10 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 import '../helpers/image_upload_provider.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
-import '../helpers/helper.dart';
 
 class ImageUploadController extends GetxController {
   var selectedImagePath = ''.obs;
@@ -126,22 +125,28 @@ class ImageUploadController extends GetxController {
     ImageUploadProvider().uploadImage(file).then((resp) {
       Get.back();
       if (resp == "success") {
-        Get.snackbar('Success', 'File Uploaded',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: successColor,
-            colorText: Colors.white);
+      final messages = "Image is selected";
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
       } else if (resp == "fail") {
-        Get.snackbar('Error', 'File upload failed',
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: errorColor,
-            colorText: Colors.white);
+        final messages = "File upload failed";
+      final button = "";
+      final route = "";
+      final request = "error_snack";
+
+     getSnackbarNotification(messages, request, button, route);
       }
     }, onError: (err) {
       Get.back();
-      Get.snackbar('Error', 'File upload failed',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: errorColor,
-          colorText: Colors.white);
+      final messages = "File upload failed";
+      final button = "";
+      final route = "";
+      final request = "error_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 
@@ -152,20 +157,12 @@ class ImageUploadController extends GetxController {
 
     if (null == mediaData) {
       loader.remove();
-      Get.snackbar(
-        "Hi, Sorry",
-        "ACL",
-        showProgressIndicator: false,
-        duration: Duration(seconds: 3),
-        snackStyle: SnackStyle.FLOATING,
-        maxWidth: MediaQuery.of(Get.context).size.width - 200,
-        backgroundColor: infoColor,
-        messageText: Text(
-          'Image is not selected',
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-      );
+      final messages = "Image is not selected";
+      final button = "";
+      final route = "";
+      final request = "info_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     } else {
       String base64Image = base64Encode(mediaData.data);
       String fileName = mediaData.fileName.split('/').last;

@@ -11,13 +11,13 @@ import 'package:global_configuration/global_configuration.dart';
 import 'src/bindings/network_binding.dart';
 import 'package:provider/provider.dart';
 import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
-
 import 'generated/l10n.dart';
 import 'route_generator.dart';
 import 'src/bloc/application_bloc.dart';
 import 'src/helpers/FBCloudMessaging.dart';
 import 'src/helpers/app_config.dart' as config;
 import 'src/models/setting.dart';
+import 'src/elements/CreateStoriesWidget.dart' as storiesRepo;
 import 'src/repository/user_repository.dart' as userRepo;
 import 'src/repository/settings_repository.dart' as settingRepo;
 
@@ -101,6 +101,9 @@ class _MyAppState extends State<MyApp> {
     settingRepo.initSettings();
     settingRepo.getCurrentLocation();
     userRepo.getCurrentUser();
+    storiesRepo.getCurrentColors();
+    storiesRepo.getCurrentGradients();
+    storiesRepo.getCurrentShadowColors();
     super.initState();
   }
 
@@ -150,57 +153,58 @@ class _MyAppState extends State<MyApp> {
                           shadowColor: Color(0xFF1D1D1D).withOpacity(0.3),
                           splashColor: Color(0xFF000000),
                           scaffoldBackgroundColor: Color(0xFFF9F9F9),
-                          hintColor: config.Colors().secondColor(1),
+                          hintColor: config.Colors().secondColor(1).withOpacity(1.0),
                           textTheme: TextTheme(
                             headline5: TextStyle(
                                 fontSize: 25.0,
                                 fontWeight: FontWeight.w700,
-                                color: config.Colors().secondColor(1),
+                                color: config.Colors().secondColor(1).withOpacity(1.0),
                                 height: 1.35),
                             headline4: TextStyle(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w500,
-                                color: Theme.of(context).splashColor,
+                                color: Theme.of(context).splashColor.withOpacity(1.0),
                                 height: 1.35),
                             headline3: TextStyle(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w700,
-                                color: config.Colors().secondColor(1),
+                                color: config.Colors().secondColor(1).withOpacity(1.0),
                                 height: 1.35),
                             headline2: TextStyle(
                                 fontSize: 45.0,
                                 fontWeight: FontWeight.w600,
-                                color: config.Colors().mainColor(1),
+                                color: config.Colors().mainColor(1).withOpacity(1.0),
                                 height: 1.35),
                             headline1: TextStyle(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w600,
-                                color: config.Colors().secondColor(1),
+                                color: config.Colors().secondColor(1).withOpacity(1.0),
                                 height: 1.5),
                             subtitle1: TextStyle(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w500,
-                                color: config.Colors().secondColor(1),
+                                color: config.Colors().secondColor(1).withOpacity(1.0),
                                 height: 1.35),
                             headline6: TextStyle(
                                 fontSize: 30.0,
                                 fontWeight: FontWeight.w700,
-                                color: config.Colors().mainColor(1),
+                                color: config.Colors().mainColor(1).withOpacity(1.0),
                                 height: 1.35),
                             bodyText2: TextStyle(
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.w400,
-                                color: config.Colors().secondColor(1),
+                                color: config.Colors().secondColor(1).withOpacity(1.0),
                                 height: 1.35),
                             bodyText1: TextStyle(
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.w600,
-                                color: config.Colors().secondColor(1),
+                                color: config.Colors().secondColor(1).withOpacity(1.0),
                                 height: 1.35),
                             caption: TextStyle(
                                 fontSize: 12.0,
-                                color: Theme.of(context).splashColor,
+                                color: Theme.of(context).splashColor.withOpacity(1.0),
                                 height: 1.35),
+                         
                           ),
                         )
                       : ThemeData(
@@ -221,7 +225,7 @@ class _MyAppState extends State<MyApp> {
                             headline5: TextStyle(
                                 fontSize: 25.0,
                                 fontWeight: FontWeight.w700,
-                                color: config.Colors().secondDarkColor(1),
+                                color: config.Colors().secondDarkColor(1).withOpacity(1.0),
                                 height: 1.35),
                             headline4: TextStyle(
                                 fontSize: 15.0,
@@ -233,40 +237,40 @@ class _MyAppState extends State<MyApp> {
                             headline3: TextStyle(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w700,
-                                color: config.Colors().secondDarkColor(1),
+                                color: config.Colors().secondDarkColor(1).withOpacity(1.0),
                                 height: 1.35),
                             headline2: TextStyle(
                                 fontSize: 45.0,
                                 fontWeight: FontWeight.w600,
-                                color: config.Colors().mainDarkColor(1),
+                                color: config.Colors().mainDarkColor(1).withOpacity(1.0),
                                 height: 1.35),
                             headline1: TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.w300,
-                                color: config.Colors().secondDarkColor(1),
+                                color: config.Colors().secondDarkColor(1).withOpacity(1.0),
                                 height: 1.5),
                             subtitle1: TextStyle(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w500,
-                                color: config.Colors().secondDarkColor(1),
+                                color: config.Colors().secondDarkColor(1).withOpacity(1.0),
                                 height: 1.35),
                             headline6: TextStyle(
                                 fontSize: 30.0,
                                 fontWeight: FontWeight.w700,
-                                color: config.Colors().mainDarkColor(1),
+                                color: config.Colors().mainDarkColor(1).withOpacity(1.0),
                                 height: 1.35),
                             bodyText2: TextStyle(
                                 fontSize: 12.0,
-                                color: config.Colors().secondDarkColor(1),
+                                color: config.Colors().secondDarkColor(1).withOpacity(1.0),
                                 height: 1.35),
                             bodyText1: TextStyle(
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.w600,
-                                color: config.Colors().secondDarkColor(1),
+                                color: config.Colors().secondDarkColor(1).withOpacity(1.0),
                                 height: 1.35),
                             caption: TextStyle(
                                 fontSize: 12.0,
-                                color: config.Colors().secondDarkColor(0.6),
+                                color: config.Colors().secondDarkColor(0.6).withOpacity(1.0),
                                 height: 1.35),
                           ),
                         ));

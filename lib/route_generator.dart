@@ -1,10 +1,13 @@
 // @dart=2.11
 import 'package:flutter/material.dart';
+import 'src/models/userstories.dart';
+import 'src/pages/community/view_stories_page.dart';
 
 import 'src/models/route_argument.dart';
 import 'src/pages/cart.dart';
 import 'src/pages/category.dart';
 import 'src/pages/checkout.dart';
+import 'src/pages/community/create_stories_page.dart';
 import 'src/pages/debug.dart';
 import 'src/pages/delivery_addresses.dart';
 import 'src/pages/delivery_pickup.dart';
@@ -27,7 +30,7 @@ import 'src/pages/signup_new.dart';
 import 'src/pages/splash_screen.dart';
 import 'src/pages/tracking.dart';
 import 'src/shared/auth-page.dart';
-
+StoriesuserModel users;
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
@@ -64,6 +67,12 @@ class RouteGenerator {
       case '/List':
         return MaterialPageRoute(
             builder: (_) => MenuWidget(routeArgument: args as RouteArgument));
+      case '/ViewStories':
+        return MaterialPageRoute(
+            builder: (_) => ViewStoriesPage(users: users,));
+      case '/CreateStories':
+        return MaterialPageRoute(
+            builder: (_) => CreateStoriesPage(users: users,));
       case '/Product':
         return MaterialPageRoute(
             builder: (_) =>

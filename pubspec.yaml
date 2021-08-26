@@ -75,18 +75,24 @@ dependencies:
   fancy_bottom_navigation: ^0.3.3
   story_designer: any
   story: ^0.5.1
+  crop_your_image: ^0.6.0+1
   mime: ^1.0.0
+  file_picker: ^4.0.0
+  square_percent_indicater: ^0.1.0
   video_compress: ^3.1.0
   keyboard_actions: ^3.3.0+1
   connectivity: ^3.0.6
   path_provider: ^2.0.2
   image: ^3.0.2
+  flutter_material_color_picker: ^1.1.0+2
   image_picker_web: ^2.0.3+1
+  gradient_widgets: ^0.6.0
 
 
   
   flutter_web_plugins:
     sdk: flutter
+  google_fonts: ^2.1.0
 
 
 dev_dependencies:
@@ -94,7 +100,7 @@ dev_dependencies:
     sdk: flutter
 
 # For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+# following page: https://dart.dev/tools/pub/pubspec 
 
 # The following section is specific to Flutter.
 flutter:

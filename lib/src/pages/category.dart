@@ -34,7 +34,7 @@ class _CategoryWidgetState extends StateMVC<CategoryWidget> {
   }
 
   @override
-  void initState() {
+  void initState() {  
     _con.listenForProductsByCategory(id: widget.routeArgument.id);
     _con.listenForCategory(id: widget.routeArgument.id);
     _con.listenForCart();

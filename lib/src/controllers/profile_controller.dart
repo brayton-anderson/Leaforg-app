@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
 import '../models/order.dart';
 import '../repository/order_repository.dart';
+import 'check_network/network_controller.dart';
 
 class ProfileController extends ControllerMVC {
   List<Order> recentOrders = [];
   GlobalKey<ScaffoldState> scaffoldKey;
 
+  final CreateNetworkController _networkController =
+      Get.find<CreateNetworkController>();
   var infoColor = Color(0xFFFFC001);
-  var errorColor = Color(0xFFDE3F44);
+  var errorColor = Color(0xFFCCCCCC);
   var successColor = Theme.of(Get.context).secondaryHeaderColor;
 
   ProfileController() {
@@ -27,36 +31,20 @@ class ProfileController extends ControllerMVC {
       });
     }, onError: (a) {
       print(a);
-      Get.snackbar(
-        "Hi",
-        "Leaforg",
-        showProgressIndicator: false,
-        duration: Duration(seconds: 5),
-        snackStyle: SnackStyle.FLOATING,
-        maxWidth: MediaQuery.of(Get.context).size.width - 200,
-        backgroundColor: errorColor,
-        messageText: Text(
-          S.of(Get.context).verify_your_internet_connection,
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-      );
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+     getSnackbarNotification(messages, request, button, route);
     }, onDone: () {
       if (message != null) {
-        Get.snackbar(
-        "Hi",
-        "Leaforg",
-        showProgressIndicator: false,
-        duration: Duration(seconds: 5),
-        snackStyle: SnackStyle.FLOATING,
-        maxWidth: MediaQuery.of(Get.context).size.width - 200,
-        backgroundColor: infoColor,
-        messageText: Text(
-         message,
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-      );
+      final messages = message;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
         
       }
     });

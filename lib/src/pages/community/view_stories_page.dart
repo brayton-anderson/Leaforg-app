@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import '../../models/data_models.dart';
+import 'package:get/get.dart';
+import 'package:lazy_loading_list/lazy_loading_list.dart';
+import '../../controllers/user_stories_controller.dart';
+import '../../elements/StoryCarouselLoaderWidget.dart';
+import '../../models/userstories.dart';
 import '../../widgets/widgets.dart';
 import 'view_stories.dart';
 import '../../helpers/responcive_app.dart' as devices;
 
 class ViewStoriesPage extends StatefulWidget {
-  final List<User> users;
+  final StoriesuserModel users;
 
   @override
   _ViewStoriesPageState createState() => _ViewStoriesPageState();
@@ -171,20 +175,52 @@ class _ViewStoriesPageState extends State<ViewStoriesPage> {
                                     height: 600,
                                     color: Colors.transparent,
                                     child: Expanded(
-                                      child: ListView.builder(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10.0),
-                                        itemCount: widget.users.length,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          final User user = widget.users[index];
-                                          return Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 8.0),
-                                            child: UserCard(),
-                                          );
-                                        },
-                                      ),
+                                      child: GetX<UserStoriesController>(
+                                          init: Get.put<UserStoriesController>(
+                                              UserStoriesController()),
+                                          builder: (UserStoriesController
+                                              userstoriesController) {
+                                            if (userstoriesController != null &&
+                                                userstoriesController
+                                                        .userstories !=
+                                                    null) {
+                                              return LazyLoadingList(
+                                                  initialSizeOfItems: 7,
+                                                  index: userstoriesController
+                                                      .userstories.length,
+                                                  hasMore: true,
+                                                  loadMore: () =>
+                                                      StoriesCarouselLoaderWidget(),
+                                                  child: ListView.builder(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        vertical: 10.0),
+                                                    itemCount:
+                                                        userstoriesController
+                                                            .userstories.length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      final StoriesuserModel
+                                                          user =
+                                                          userstoriesController
+                                                                  .userstories[
+                                                              index];
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                vertical: 8.0),
+                                                        child: UserCard(
+                                                          users: user,
+                                                        ),
+                                                      );
+                                                    },
+                                                  ));
+                                            } else {
+                                              return StoriesCarouselLoaderWidget();
+                                            }
+                                          }),
                                     ),
                                   ),
                                 ],

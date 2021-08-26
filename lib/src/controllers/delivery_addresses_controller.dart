@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -8,16 +9,17 @@ import '../models/cart.dart';
 import '../repository/cart_repository.dart';
 import '../repository/settings_repository.dart' as settingRepo;
 import '../repository/user_repository.dart' as userRepo;
+import 'check_network/network_controller.dart';
 
 class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
   List<model.Address> addresses = <model.Address>[];
   GlobalKey<ScaffoldState> scaffoldKey;
   Cart cart;
+  final CreateNetworkController _networkController =
+      Get.find<CreateNetworkController>();
   var infoColor = Color(0xFFFFC001);
-  var errorColor = Color(0xFFDE3F44);
+  var errorColor = Color(0xFFCCCCCC);
   var successColor = Theme.of(Get.context).secondaryHeaderColor;
-
-  
 
   DeliveryAddressesController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -33,41 +35,21 @@ class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
       });
     }, onError: (a) {
       print(a);
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: errorColor,
-            messageText: Text(
-              '${S.of(Get.context).verify_your_internet_connection}',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+     getSnackbarNotification(messages, request, button, route);
+
     }, onDone: () {
       if (message != null) {
-        Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: infoColor,
-            messageText: Text(
-              message,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
-        
+          // final messages = "";
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(message, request, button, route);
       }
     });
   }
@@ -81,7 +63,8 @@ class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
 
   Future<void> refreshAddresses() async {
     addresses.clear();
-    listenForAddresses(message: S.of(Get.context).addresses_refreshed_successfuly);
+    listenForAddresses(
+        message: S.of(Get.context).addresses_refreshed_successfuly);
   }
 
   Future<void> changeDeliveryAddress(model.Address address) async {
@@ -105,22 +88,12 @@ class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
       setState(() {
         this.addresses.insert(0, value);
       });
-       Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: successColor,
-            messageText: Text(
-              S.of(Get.context).new_address_added_successfully,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = S.of(Get.context).new_address_added_successfully;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 
@@ -145,22 +118,12 @@ class DeliveryAddressesController extends ControllerMVC with ChangeNotifier {
       setState(() {
         this.addresses.remove(address);
       });
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: successColor,
-            messageText: Text(
-              S.of(Get.context).delivery_address_removed_successfully,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = S.of(Get.context).delivery_address_removed_successfully;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 }

@@ -1,20 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:leaforgapp/src/models/user.dart';
-import '../pages/community/view_stories_page.dart';
+import 'package:lazy_loading_list/lazy_loading_list.dart';
+import '../elements/StoryCarouselLoaderWidget.dart';
+import '../models/userstories.dart';
+import '../elements/social/utils.dart';
+import '../controllers/user_stories_controller.dart';
+import '../models/user.dart';
+import '../repository/user_repository.dart';
+import 'user_post_avatar.dart';
 import '../soconfig/pallete.dart';
-import '../models/data_models.dart';
 import '../widgets/widgets.dart';
 
 class Stories extends StatelessWidget {
-  final User currentUser;
-  final List<Story> stories;
-
   const Stories({
     Key key,
-    @required this.currentUser,
-    @required this.stories,
   }) : super(key: key);
 
   @override
@@ -22,42 +22,65 @@ class Stories extends StatelessWidget {
     return Container(
       height: 200.0,
       color: Responsive.isDesktop(context) ? Colors.transparent : Colors.white,
-      child: ListView.builder(
-        padding: const EdgeInsets.symmetric(
-          vertical: 10.0,
-          horizontal: 8.0,
-        ),
-        scrollDirection: Axis.horizontal,
-        itemCount: 1 + stories.length,
-        itemBuilder: (BuildContext context, int index) {
-          if (index == 0) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: _StoryCard(
-                isAddStory: true,
-                currentUser: currentUser,
-              ),
-            );
-          }
-          final Story story = stories[index - 1];
-          return GestureDetector(
-              onTap: () => Get.to(() => ViewStoriesPage(
-                    // users: stories,
-                  )),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                child: _StoryCard(story: story),
-              ));
-        },
-      ),
+      child: GetX<UserStoriesController>(
+          init: Get.put<UserStoriesController>(UserStoriesController()),
+          builder: (UserStoriesController userstoriesController) {
+            if (userstoriesController != null &&
+                userstoriesController.userstories != null) {
+              return LazyLoadingList(
+                  initialSizeOfItems: 7,
+                  index: userstoriesController.userstories.length,
+                  hasMore: true,
+                  loadMore: () => StoriesCarouselLoaderWidget(),
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10.0,
+                      horizontal: 8.0,
+                    ),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: userstoriesController.userstories.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var userdataid = userstoriesController.userstories
+                          .map((e) => e.storyuserid);
+                      var userdatatimestamp = userstoriesController.userstories
+                          .map((e) => e.first_story_timestamp);
+                      var usertimestamp = userdatatimestamp.toList();
+                      var userid = userdataid.toList();
+                      print(usertimestamp);
+                      for (var usertimestampsingle in usertimestamp)
+                        if (userid != currentUser.value.id ||
+                            Utils.readTimestamp(usertimestampsingle) == '1d' ||
+                            usertimestampsingle == 'NONE') {
+                          print('NO STORIES');
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 4.0),
+                            child: _StoryCard(
+                              isAddStory: true,
+                              currentUser: currentUser,
+                            ),
+                          );
+                        }
+                      final StoriesuserModel story =
+                          userstoriesController.userstories[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: _StoryCard(story: story),
+                      );
+                    },
+                  ));
+            } else {
+              return StoriesCarouselLoaderWidget();
+            }
+          }),
     );
   }
 }
 
 class _StoryCard extends StatelessWidget {
   final bool isAddStory;
-  final User currentUser;
-  final Story story;
+  final ValueNotifier<Userss> currentUser;
+  final StoriesuserModel story;
 
   const _StoryCard({
     Key key,
@@ -66,6 +89,8 @@ class _StoryCard extends StatelessWidget {
     this.story,
   }) : super(key: key);
 
+  static bool isStoryViewed = true;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -73,15 +98,21 @@ class _StoryCard extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(12.0),
           child: GestureDetector(
-            onTap: () =>
-                isAddStory ? print('dada') : Get.to(() => ViewStoriesPage()),
-            child: CachedNetworkImage(
-              imageUrl: isAddStory ? currentUser.imageUrl : story.imageUrl,
-              height: double.infinity,
-              width: 110.0,
-              fit: BoxFit.cover,
-            ),
-          ),
+              onTap: () => isAddStory
+                  ? Navigator.of(context).pushNamed(
+                      '/CreateStories',
+                    )
+                  : Navigator.of(context).pushNamed(
+                      '/ViewStories',
+                    ),
+              child: CachedNetworkImage(
+                imageUrl: isAddStory
+                    ? currentUser.value.image.thumb
+                    : story.first_story_image,
+                height: double.infinity,
+                width: 110.0,
+                fit: BoxFit.cover,
+              )),
         ),
         Container(
           height: double.infinity,
@@ -116,26 +147,37 @@ class _StoryCard extends StatelessWidget {
                     icon: const Icon(Icons.add),
                     iconSize: 30.0,
                     color: Palette.facebookBlue,
-                    onPressed: () => print('Add to Story'),
+                    onPressed: () => Navigator.of(context).pushNamed(
+                      '/CreateStories',
+                    ),
                   ),
                 )
-              : ProfileAvatar(
-                  hasBorder: !story.isViewed,
+              : UserPostAvatar(
+                  hasBorder: !isStoryViewed,
+                  story: story,
                 ),
         ),
         Positioned(
           bottom: 8.0,
           left: 8.0,
           right: 8.0,
-          child: Text(
-            isAddStory ? 'Add to Story' : story.user.name,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
+          child: GestureDetector(
+              onTap: () => isAddStory
+                  ? Navigator.of(context).pushNamed(
+                      '/CreateStories',
+                    )
+                  : Navigator.of(context).pushNamed(
+                      '/ViewStories',
+                    ),
+              child: Text(
+                isAddStory ? 'Add to Story' : story.user_name,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              )),
         ),
       ],
     );

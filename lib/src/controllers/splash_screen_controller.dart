@@ -5,17 +5,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 //import 'package:google_map_location_picker/generated/l10n.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../helpers/custom_trace.dart';
 import '../repository/settings_repository.dart' as settingRepo;
+import 'check_network/network_controller.dart';
 
 class SplashScreenController extends ControllerMVC {
   ValueNotifier<Map<String, double>> progress = new ValueNotifier(new Map());
   GlobalKey<ScaffoldMessengerState> scaffoldKey;
 
+  final CreateNetworkController _networkController =
+      Get.find<CreateNetworkController>();
   var infoColor = Color(0xFFFFC001);
-  var errorColor = Color(0xFFDE3F44);
+  var errorColor = Color(0xFFCCCCCC);
   var successColor = Theme.of(Get.context).secondaryHeaderColor;
 
   //BuildContext context;
@@ -57,20 +61,12 @@ class SplashScreenController extends ControllerMVC {
     //   progress.notifyListeners();
     // });
     Timer(Duration(seconds: 20), () {
-      Get.snackbar(
-        "Hi",
-        "Leaforg",
-        showProgressIndicator: false,
-        duration: Duration(seconds: 5),
-        snackStyle: SnackStyle.FLOATING,
-        maxWidth: MediaQuery.of(Get.context).size.width - 200,
-        backgroundColor: errorColor,
-        messageText: Text(
-         'Verify your internet Connection',
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-      );
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 

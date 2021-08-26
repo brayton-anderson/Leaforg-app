@@ -42,8 +42,8 @@ class Order {
       payment = jsonMap['payment'] != null
           ? Payment.fromJSON(jsonMap['payment'])
           : Payment.fromJSON({});
-      productOrders = jsonMap['food_orders'] != null
-          ? List.from(jsonMap['food_orders'])
+      productOrders = jsonMap['product_orders'] != null
+          ? List.from(jsonMap['product_orders'])
               .map((element) => ProductOrder.fromJSON(element))
               .toList()
           : [];

@@ -53,7 +53,9 @@ class HomeView extends GetView<BottomNavController> {
         ),
       ),
       bottomNavigationBar: Obx(
-        () => FancyBottomNavigation(
+        () => 
+        
+        FancyBottomNavigation(
           tabs: [
             TabData(
               iconData: Icons.home,
@@ -80,6 +82,9 @@ class HomeView extends GetView<BottomNavController> {
           key: controller.bottomNavigationKey,
           inactiveIconColor: Colors.grey,
         ),
+
+
+        
       ),
     );
   }

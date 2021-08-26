@@ -45,11 +45,11 @@ class Slide {
           ? jsonMap['image_fit'].toString()
           : 'cover';
       enabled = jsonMap['enabled'] ?? false;
-      store = jsonMap['restaurant'] != null
-          ? Store.fromJSON(jsonMap['restaurant'])
+      store = jsonMap['stores'] != null
+          ? Store.fromJSON(jsonMap['stores'])
           : Store.fromJSON({});
-      product = jsonMap['food'] != null
-          ? Product.fromJSON(jsonMap['food'])
+      product = jsonMap['products'] != null
+          ? Product.fromJSON(jsonMap['products'])
           : Product.fromJSON({});
       image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0
           ? Media.fromJSON(jsonMap['media'][0])

@@ -50,22 +50,22 @@ double respsignContainerWidth(MediaQueryData mediaQuery) {
   double deviceWidth = mediaQuery.size.width;
   double deviceHeight = mediaQuery.size.height;
   if (deviceWidth <= 699) {
-    print("${deviceWidth.toString()} - height:-${deviceHeight.toString()}");
+    //print("${deviceWidth.toString()} - height:-${deviceHeight.toString()}");
     return mediaQuery.size.width;
   } else if (deviceWidth <= 999) {
     final widthPr = mediaQuery.size.width * 0.50;
-    print("${widthPr.toString()} - height:-${deviceHeight.toString()}");
+   // print("${widthPr.toString()} - height:-${deviceHeight.toString()}");
     return mediaQuery.size.width * 0.50;
   } else if (deviceWidth <= 1199) {
     final widthPr = mediaQuery.size.width * 0.65;
-    print("${widthPr.toString()} - height:-${deviceHeight.toString()}");
+    //print("${widthPr.toString()} - height:-${deviceHeight.toString()}");
     return mediaQuery.size.width * 0.65;
   } else if (deviceWidth <= 1649) {
     final widthPr = mediaQuery.size.width * 0.65;
-    print("${widthPr.toString()} - height:-${deviceHeight.toString()}");
+   // print("${widthPr.toString()} - height:-${deviceHeight.toString()}");
     return mediaQuery.size.width * 0.65;
   }
-  print("${deviceWidth.toString()} - height:-${deviceHeight.toString()}");
+  //print("${deviceWidth.toString()} - height:-${deviceHeight.toString()}");
   return mediaQuery.size.width * 0.65;
 }
 
@@ -117,13 +117,13 @@ String checkingDevice(MediaQueryData mediaQuery) {
   if (deviceWidth < 600) {
     return "mobile";
   } else if (deviceWidth > 600 && deviceWidth < 720) {
-    print(deviceWidth);
+   // print(deviceWidth);
     return "small_tab";
   } else if (deviceWidth > 720 && deviceWidth < 1024) {
-    print(deviceWidth);
+   // print(deviceWidth);
     return "big_tab";
   } else {
-    print(deviceWidth);
+   // print(deviceWidth);
     return "desktop";
   }
 }
@@ -132,33 +132,33 @@ String checkingDevicePlatform() {
   if (GetPlatform.isMobile) {
     if (GetPlatform.isWeb) {
       if (Get.context.isPhone) {
-        print("android_web_(w=)_less_than_600p");
+       // print("android_web_(w=)_less_than_600p");
         return "phone_web";
       } else if (Get.context.isSmallTablet) {
-        print("small_tab_web_(w=)_great_than_600p");
+       // print("small_tab_web_(w=)_great_than_600p");
         return "small_tab_web";
       } else if (Get.context.isLargeTablet) {
-        print("big_tab_web_(w=)_great_than_720p");
+       // print("big_tab_web_(w=)_great_than_720p");
         return "big_tab_web";
       }
     } else {
       if (Get.context.isPhone) {
-        print("android_app_(w=)_less_than_600p");
+       // print("android_app_(w=)_less_than_600p");
         return "phone_app";
       } else if (Get.context.isSmallTablet) {
-        print("small_tab_app_(w=)_great_than_600p");
+        //print("small_tab_app_(w=)_great_than_600p");
         return "small_tab_app";
       } else if (Get.context.isLargeTablet) {
-        print("big_tab_app_(w=)_great_than_720p");
+        //print("big_tab_app_(w=)_great_than_720p");
         return "big_tab_app";
       }
     }
   } else if (GetPlatform.isDesktop) {
     if (GetPlatform.isWeb) {
-      print("android_web_desktop");
+      //print("android_web_desktop");
       return "desktop_web";
     } else {
-      print("android_app_desktop");
+     // print("android_app_desktop");
       return "desktop_app";
     }
   }
@@ -387,7 +387,7 @@ String checkingDevicePlatform() {
   //     }
   //   }
   // }
-  print("dont_know");
+ // print("dont_know");
   return "dont_know";
 }
 

@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:leaforgapp/src/pages/market_place.dart';
+import '../pages/market_place.dart';
 import '../pages/sorry_page_comming_soon.dart';
 import '../repository/user_repository.dart';
 import '../pages/community_nav.dart';
@@ -294,7 +294,7 @@ class _HomeIconChipsItemState extends State<HomeIconChipsItem> {
     HomeSubIconsChips(
       id: '1',
       title: 'Vegeterian',
-      image: 'assets/images/restaurants/vegeterian_foods.png',
+      image: 'assets/images/stores/vegeterian_foods.png',
       top: '60',
       bottom: '0',
       left: '143',
@@ -305,7 +305,7 @@ class _HomeIconChipsItemState extends State<HomeIconChipsItem> {
     HomeSubIconsChips(
       id: '2',
       title: 'Fast foods',
-      image: 'assets/images/restaurants/green_restaurants_at_leaforg.png',
+      image: 'assets/images/stores/green_stores_at_leaforg.png',
       top: '60',
       bottom: '0',
       left: '0',

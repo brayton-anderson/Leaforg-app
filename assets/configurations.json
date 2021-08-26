@@ -1,4 +1,4 @@
 {
-    "base_url": "http://localhost/leaforg/public/",
-    "api_base_url": "http://localhost/leaforg/public/api/"
+    "base_url": "https://2fcb01fd.us-south.apigw.appdomain.cloud/leaforg/",
+    "api_base_url": "https://2fcb01fd.us-south.apigw.appdomain.cloud/leaforg/api/"
 }

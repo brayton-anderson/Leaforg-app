@@ -1,0 +1,41 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: leaforg-app-front-new
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    app: leaforg-app-front-new
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: web
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: leaforg-app-front-new
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: leaforg-app-front-new
+  template:
+    metadata:
+      labels:
+        app: leaforg-app-front-new
+    spec:
+      containers:
+        - name: app
+          image: andie2120/leaforg-app:1.0.4
+          imagePullPolicy: "Always"
+          ports:
+            - name: web
+              containerPort: 3000
+              protocol: TCP
+      imagePullSecrets:
+      - name: regcreleaforg

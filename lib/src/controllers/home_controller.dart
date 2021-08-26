@@ -71,7 +71,7 @@ class HomeController extends ControllerMVC {
   }
 
   Future<void> listenForTrendingProducts() async {
-    final Stream<Product> stream =
+    final Stream<Product> stream =  
         await getTrendingProducts(deliveryAddress.value);
     stream.listen((Product _product) {
       setState(() => trendingProducts.add(_product));

@@ -82,18 +82,19 @@ class Utils {
     );
   }
 
-  static Future<Userss> updateLikeCount(
+  static Future<MyProfileData> updateLikeCount(
       DocumentSnapshot data,
       bool isLikePost,
-      Userss myProfileData,
-      ValueChanged<Userss> updateMyData,
+      MyProfileData myProfileData,
+      ValueChanged<MyProfileData> updateMyData,
       bool isThread) async {
     List<String> newLikeList = await LocalTempDB.saveLikeList(
         data[isThread ? 'postID' : 'commentID'],
         myProfileData.myLikeList,
         isLikePost,
         isThread ? 'likeList' : 'likeCommnetList');
-    Userss myNewProfileData = Userss(
+       
+    MyProfileData myNewProfileData = MyProfileData(
         name: currentUser.value.name,
         email: currentUser.value.email,
         apiToken: currentUser.value.apiToken,

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../elements/social/const.dart';
 import '../repository/user_repository.dart';
 import '../models/user.dart';
 import '../elements/social/utils.dart';
@@ -8,7 +9,7 @@ import '../helpers/FBCloudMessaging.dart';
 
 class FBCloudStore {
   static Future<void> sendPostInFirebase(String postID, String postContent,
-      Userss userProfile, String postImageURL) async {
+      MyProfileData userProfile, String postImageURL) async {
     FirebaseFirestore.instance.collection('thread').doc(postID).set({
       'postID': postID,
       'userName': currentUser.value.name,
@@ -21,6 +22,8 @@ class FBCloudStore {
       'FCMToken': currentUser.value.deviceToken
     });
   }
+
+ 
 
   static Future<void> sendReportUserToFB(context, String reason,
       String userName, String postId, String content, String reporter) async {
@@ -38,7 +41,7 @@ class FBCloudStore {
   }
 
   static Future<void> likeToPost(
-      String postID, Userss userProfile, bool isLikePost) async {
+      String postID, MyProfileData userProfile, bool isLikePost) async {
     if (isLikePost) {
       DocumentReference likeReference = FirebaseFirestore.instance
           .collection('thread')
@@ -63,7 +66,7 @@ class FBCloudStore {
   }
 
   static Future<void> updatePostLikeCount(
-      DocumentSnapshot postData, bool isLikePost, Userss myProfileData) async {
+      DocumentSnapshot postData, bool isLikePost, MyProfileData myProfileData) async {
     postData.reference
         .update({'postLikeCount': FieldValue.increment(isLikePost ? -1 : 1)});
     if (!isLikePost) {
@@ -81,7 +84,7 @@ class FBCloudStore {
   }
 
   static Future<void> updateCommentLikeCount(
-      DocumentSnapshot postData, bool isLikePost, Userss myProfileData) async {
+      DocumentSnapshot postData, bool isLikePost, MyProfileData myProfileData) async {
     postData.reference.update(
         {'commentLikeCount': FieldValue.increment(isLikePost ? -1 : 1)});
     if (!isLikePost) {

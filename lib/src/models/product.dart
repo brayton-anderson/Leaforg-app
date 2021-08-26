@@ -63,8 +63,8 @@ class Product {
       userproduct = jsonMap['userproduct'] != null
           ? UserProduct.fromJSON(jsonMap['userproduct'])
           : UserProduct.fromJSON({});
-      store = jsonMap['restaurant'] != null
-          ? Store.fromJSON(jsonMap['restaurant'])
+      store = jsonMap['stores'] != null
+          ? Store.fromJSON(jsonMap['stores'])
           : Store.fromJSON({});
       category = jsonMap['category'] != null
           ? Category.fromJSON(jsonMap['category'])
@@ -86,9 +86,9 @@ class Product {
               .toSet()
               .toList()
           : [];
-      productReviews = jsonMap['food_reviews'] != null &&
-              (jsonMap['food_reviews'] as List).length > 0
-          ? List.from(jsonMap['food_reviews'])
+      productReviews = jsonMap['product_reviews'] != null &&
+              (jsonMap['product_reviews'] as List).length > 0
+          ? List.from(jsonMap['product_reviews'])
               .map((element) => Review.fromJSON(element))
               .toSet()
               .toList()

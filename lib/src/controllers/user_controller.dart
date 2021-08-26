@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
@@ -56,40 +57,23 @@ class UserController extends ControllerMVC {
               .pushReplacementNamed('/Pages', arguments: 2);
           // registerVerifyPhone(Get.context);
         } else {
-          Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: infoColor,
-            messageText: Text(
-              S.of(Get.context).wrong_email_or_password,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+          //final color = infoColor;
+        final messages = S.of(Get.context).wrong_email_or_password;
+        final button = "";
+        final route = "";
+        final request = "error_snack";
+
+        getSnackbarNotification(messages, request, button, route);
           loader.remove();
         }
       }).catchError((e) {
         loader.remove();
-        Get.snackbar(
-          "Hi",
-          "Leaforg",
-          showProgressIndicator: false,
-          duration: Duration(seconds: 5),
-          snackStyle: SnackStyle.FLOATING,
-          maxWidth: MediaQuery.of(Get.context).size.width - 200,
-          backgroundColor: errorColor,
-          messageText: Text(
-            S.of(Get.context).this_account_not_exist,
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-          ),
-        );
+        final messages = S.of(Get.context).this_account_not_exist;
+        final button = "";
+        final route = "";
+        final request = "error_snack";
+
+        getSnackbarNotification(messages, request, button, route);
       }).whenComplete(() {
         Helper.hideLoader(loader);
       });
@@ -110,38 +94,20 @@ class UserController extends ControllerMVC {
           // Navigator.of(scaffoldKey.currentContext)
           //     .pushReplacementNamed('/Pages', arguments: 2);
         } else {
-          Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: infoColor,
-            messageText: Text(
-              S.of(Get.context).wrong_email_or_password,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+          final messages = S.of(Get.context).wrong_email_or_password;
+        final button = "";
+        final route = "";
+        final request = "error_snack";
+
+        getSnackbarNotification(messages, request, button, route);
         }
       }).catchError((e) {
-        Get.snackbar(
-          "Hi",
-          "Leaforg",
-          showProgressIndicator: false,
-          duration: Duration(seconds: 2),
-          snackStyle: SnackStyle.FLOATING,
-          maxWidth: MediaQuery.of(Get.context).size.width - 200,
-          backgroundColor: errorColor,
-          messageText: Text(
-            S.of(Get.context).this_email_account_exists,
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-          ),
-        );
+        final messages = S.of(Get.context).this_email_account_exists;
+        final button = "";
+        final route = "";
+        final request = "error_snack";
+
+        getSnackbarNotification(messages, request, button, route);
         loader?.remove();
       }).whenComplete(() {
         Helper.hideLoader(loader);
@@ -156,10 +122,12 @@ class UserController extends ControllerMVC {
       Overlay.of(Get.overlayContext).insert(loader);
       repository.resetPassword(user).then((value) {
         if (value != null && value == true) {
-          Get.snackbar(
-            "Hi",
-            "${S.of(Get.context).your_reset_link_has_been_sent_to_your_email}",
-          );
+          final messages = S.of(Get.context).your_reset_link_has_been_sent_to_your_email;
+        final button = "";
+        final route = "";
+        final request = "info_snack";
+
+        getSnackbarNotification(messages, request, button, route);
           // scaffoldKey?.currentState?.showSnackBar(SnackBar(
           //   content: ,
           //   action: SnackBarAction(
@@ -172,10 +140,12 @@ class UserController extends ControllerMVC {
           // ));
         } else {
           loader.remove();
-          Get.snackbar(
-            "Hi",
-            "${S.of(Get.context).error_verify_email_settings}",
-          );
+        final messages = S.of(Get.context).error_verify_email_settings;
+        final button = "";
+        final route = "";
+        final request = "error_snack";
+
+        getSnackbarNotification(messages, request, button, route);
         }
       }).whenComplete(() {
         Helper.hideLoader(loader);
@@ -211,22 +181,12 @@ class UserController extends ControllerMVC {
           },
           verificationFailed: (FirebaseAuthException e) {
             print(e.message);
-            Get.snackbar(
-              "Hi",
-              "Leaforg",
-              showProgressIndicator: false,
-              duration: Duration(seconds: 5),
-              snackStyle: SnackStyle.FLOATING,
-              maxWidth: MediaQuery.of(Get.context).size.width - 200,
-              backgroundColor: errorColor,
-              messageText: Text(
-                "Sorry!, We are unable to verify ${user.phone}. Please again.",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500),
-              ),
-            );
+            final messages = "Sorry!, We are unable to verify ${user.phone}. Please again.";
+            final button = "";
+            final route = "";
+            final request = "error_snack";
+
+            getSnackbarNotification(messages, request, button, route);
           },
           codeSent: (String verficationID, int resendToken) {
             setState(() {
@@ -242,20 +202,12 @@ class UserController extends ControllerMVC {
           timeout: Duration(seconds: 120));
     } catch (e) {
       loader?.remove();
-      Get.snackbar(
-        "Hi",
-        "Leaforg",
-        showProgressIndicator: false,
-        duration: Duration(seconds: 5),
-        snackStyle: SnackStyle.FLOATING,
-        maxWidth: MediaQuery.of(Get.context).size.width - 200,
-        backgroundColor: errorColor,
-        messageText: Text(
-          "Sorry!, ${user.phone} an Error just happened. Please again.",
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-      );
+      final messages = "Sorry!, ${user.phone} an Error just happened. Please again.";
+      final button = "";
+      final route = "";
+      final request = "error_snack";
+
+      getSnackbarNotification(messages, request, button, route);
     }
   }
 
@@ -295,22 +247,12 @@ class UserController extends ControllerMVC {
                     });
                   } catch (e) {
                     FocusScope.of(context).unfocus();
-                    Get.snackbar(
-                      "Hi",
-                      "Leaforg",
-                      showProgressIndicator: false,
-                      duration: Duration(seconds: 5),
-                      snackStyle: SnackStyle.FLOATING,
-                      maxWidth: MediaQuery.of(Get.context).size.width - 200,
-                      backgroundColor: infoColor,
-                      messageText: Text(
-                        "Sorry!, invalid OTP.",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    );
+                    final messages = "Sorry!, invalid OTP.";
+                    final button = "";
+                    final route = "";
+                    final request = "error_snack";
+
+                    getSnackbarNotification(messages, request, button, route);
                   }
                 },
               ),

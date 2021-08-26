@@ -17,8 +17,8 @@ class ProductOrder {
       price = jsonMap['price'] != null ? jsonMap['price'].toDouble() : 0.0;
       quantity =
           jsonMap['quantity'] != null ? jsonMap['quantity'].toDouble() : 0.0;
-      product = jsonMap['food'] != null
-          ? Product.fromJSON(jsonMap['food'])
+      product = jsonMap['products'] != null
+          ? Product.fromJSON(jsonMap['products'])
           : Product.fromJSON({});
       dateTime = DateTime.parse(jsonMap['updated_at']);
       extras = jsonMap['extras'] != null
@@ -42,7 +42,7 @@ class ProductOrder {
     map["id"] = id;
     map["price"] = price;
     map["quantity"] = quantity;
-    map["food_id"] = product.id;
+    map["product_id"] = product.id;
     map["extras"] = extras.map((element) => element.id).toList();
     return map;
   }

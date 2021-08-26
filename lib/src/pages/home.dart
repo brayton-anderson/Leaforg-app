@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import 'package:leaforgapp/src/elements/SearchWidget.dart';
 import '../shared/leaforg_footer_mobile_row.dart';
 import '../shared/leaforg_footer_row.dart';
 import '../shared/leaforg_partners_sectionWrap.dart';
@@ -320,12 +321,14 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LeaforgLocationsScreen()),
-                                        );
+                                        Navigator.of(context)
+                                            .push(SearchModal());
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //       builder: (context) =>
+                                        //           LeaforgLocationsScreen()),
+                                        // );
                                       },
                                       child: Container(
                                         height: UdDesign.blocksYaxis(
@@ -607,7 +610,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                                 //       },
                                 //     ),
                                 //   );
-                                case 'top_restaurants_heading':
+                                case 'top_stores_heading':
                                   return Padding(
                                     padding: const EdgeInsets.only(
                                         top: 15,
@@ -788,7 +791,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                                       ],
                                     ),
                                   );
-                                case 'top_restaurants':
+                                case 'top_stores':
                                   return CardsCarouselWidget(
                                       storesList: _con.topStores,
                                       heroTag: 'home_top_stores');
@@ -894,7 +897,7 @@ class _HomeWidgetState extends StateMVC<HomeWidget> {
                                         child: Container(
                                           color: Theme.of(context)
                                               .focusColor
-                                              .withOpacity(0.5),
+                                              .withOpacity(0.03),
                                           height: checkingDevice(mediaQuery) ==
                                                   'mobile'
                                               ? 1880

@@ -1,0 +1,56 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import '../models/userstories.dart';
+import '../soconfig/pallete.dart';
+
+class UserPostAvatar extends StatelessWidget {
+
+  final StoriesuserModel story;
+
+  final bool isActive;
+  final bool hasBorder;
+
+  const UserPostAvatar({
+    Key key,
+    this.isActive = false,
+    this.hasBorder = false,
+    @required this.story,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        CircleAvatar(
+          radius: 23.0,
+          backgroundColor: hasBorder
+              ? Theme.of(context).secondaryHeaderColor
+              : Palette.online,
+          child: CircleAvatar(
+            radius: 20.0,
+            backgroundColor: Colors.grey[200],
+            backgroundImage: CachedNetworkImageProvider(story.user_image),
+          ),
+        ),
+        isActive
+            ? Positioned(
+                bottom: 0.0,
+                right: 0.0,
+                child: Container(
+                  height: 15.0,
+                  width: 15.0,
+                  decoration: BoxDecoration(
+                    color: Palette.online,
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      width: 2.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              )
+            : const SizedBox.shrink(),
+      ],
+    );
+  }
+}

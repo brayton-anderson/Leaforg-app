@@ -234,6 +234,7 @@ Future<Stream<Product>> getProductsOfStore(String storeId,
     'search': 'store_id:$storeId',
     'searchFields': 'store_id:=',
   };
+  print("nana");
 
   if (categories != null && categories.isNotEmpty) {
     query['categories[]'] = categories;
@@ -265,6 +266,7 @@ Future<Stream<Product>> getTrendingProductsOfStore(String storeId) async {
     'searchFields': 'store_id:=;featured:=',
     'searchJoin': 'and',
   });
+  print(uri.toString());
   // TODO Trending products only
   try {
     final client = new http.Client();

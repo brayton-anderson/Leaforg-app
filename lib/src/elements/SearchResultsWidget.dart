@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leaforgapp/src/helpers/responcive_app.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -50,11 +51,11 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
               ),
               title: Text(
                 S.of(context).search,
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headline4.copyWith(color: Theme.of(context).splashColor),
               ),
               subtitle: Text(
                 S.of(context).ordered_by_nearby_first,
-                style: Theme.of(context).textTheme.caption,
+                style: Theme.of(context).textTheme.caption.copyWith(color: Theme.of(context).splashColor),
               ),
             ),
           ),
@@ -72,7 +73,7 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                 hintStyle: Theme.of(context)
                     .textTheme
                     .caption
-                    .merge(TextStyle(fontSize: 14)),
+                    .merge(TextStyle(fontSize: 14)).copyWith(color: Theme.of(context).splashColor),
                 prefixIcon: Icon(Icons.search,
                     color: Theme.of(context).secondaryHeaderColor),
                 border: OutlineInputBorder(
@@ -99,18 +100,23 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                           contentPadding: EdgeInsets.symmetric(vertical: 0),
                           title: Text(
                             S.of(context).products_results,
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context).textTheme.subtitle1.copyWith(color: Theme.of(context).splashColor),
                           ),
                         ),
                       ),
-                      ListView.separated(
+                      GridView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
                         primary: false,
                         itemCount: _con.products.length,
-                        separatorBuilder: (context, index) {
-                          return SizedBox(height: 10);
-                        },
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: Responsive.isMobile(context)
+                                ? 1
+                                : Responsive.isTablet(context)
+                                    ? 2
+                                    : 4,
+                            crossAxisSpacing: 4.0,
+                            mainAxisSpacing: 4.0),
                         itemBuilder: (context, index) {
                           return ProductItemWidget(
                             heroTag: 'search_list',
@@ -126,14 +132,22 @@ class _SearchResultWidgetState extends StateMVC<SearchResultWidget> {
                           contentPadding: EdgeInsets.symmetric(vertical: 0),
                           title: Text(
                             S.of(context).stores_results,
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context).textTheme.subtitle1.copyWith(color: Theme.of(context).splashColor),
                           ),
                         ),
                       ),
-                      ListView.builder(
+                      GridView.builder(
                         shrinkWrap: true,
                         primary: false,
                         itemCount: _con.stores.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: Responsive.isMobile(context)
+                                ? 1
+                                : Responsive.isTablet(context)
+                                    ? 2
+                                    : 4,
+                            crossAxisSpacing: 4.0,
+                            mainAxisSpacing: 4.0),  
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {

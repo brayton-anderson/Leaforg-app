@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../helpers/snackbar_notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../helpers/app_config.dart' as config;
@@ -64,6 +65,12 @@ class MapController extends ControllerMVC {
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSION_DENIED') {
         print('Permission denied');
+        final messages = "Permission denied";
+      final button = "";
+      final route = "";
+      final request = "error_snack";
+
+     getSnackbarNotification(messages, request, button, route);
       }
     }
   }
@@ -87,6 +94,12 @@ class MapController extends ControllerMVC {
       });
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSION_DENIED') {
+        final messages = "Permission denied";
+      final button = "";
+      final route = "";
+      final request = "error_snack";
+
+     getSnackbarNotification(messages, request, button, route);
         print('Permission denied');
       }
     }

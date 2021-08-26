@@ -58,7 +58,7 @@ The Leaforg solution currently comprises mainly highly visual and easy-to-use we
 
 The goal of the project is to help more persons become enviromentally friendly by providing them with easy yo use platform that introduces them to quick and simple ways to recycle their products, whether it is through the recycle at home feature to repair them, dispose them responsibly through the find a recycler feature, or selling them to others through our marketplace feature.
 
-Participation is welcomed from software developers, designers, testers, disposal experts, restaurants, repair shops, green products manufactures, and others that can help improve the our environments by coming with solutions to reduce our carbon footprints around the world. 
+Participation is welcomed from software developers, designers, testers, disposal experts, stores, repair shops, green products manufactures, and others that can help improve the our environments by coming with solutions to reduce our carbon footprints around the world. 
 
 Key areas the team are interested in developing include localizing the mobile app, improving the backend api service, updating project documentation, software, more in-depth research, and adding products data to the database.
 

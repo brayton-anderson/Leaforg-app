@@ -2,19 +2,19 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
+import '../elements/social/const.dart';
 import '../elements/social/utils.dart';
-import '../models/user.dart';
 import '../soconfig/pallete.dart';
 import '../widgets/widgets.dart';
 
-class PostContainer extends StatelessWidget {
+class PostContainer extends StatefulWidget {
   final DocumentSnapshot<Object> post;
   final bool isFromThread;
   //final Function threadItemAction;
   final int commentCount;
 
-  final Userss myData;
-  final ValueChanged<Userss> updateMyDataToMain;
+  final MyProfileData myData;
+  final ValueChanged<MyProfileData> updateMyDataToMain;
 
   PostContainer({
     Key key,
@@ -29,8 +29,23 @@ class PostContainer extends StatelessWidget {
     // @required this.parentContext,
   }) : super(key: key);
 
+   @override State<StatefulWidget> createState() => _PostContainer();
+}
+
+class _PostContainer extends State<PostContainer>{
+
+   MyProfileData _currentMyData;
+  int _likeCount;
+  @override
+  void initState() {
+    _currentMyData = widget.myData;
+    _likeCount = widget.post['postLikeCount'];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final imagepost = widget.post['postImage'];
     //FirebaseServices firebaseServices = FirebaseServices();
     final bool isDesktop = Responsive.isDesktop(context);
 
@@ -54,41 +69,53 @@ class PostContainer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _PostHeader(
-                    data: post,
-                    commentCount: commentCount,
-                    isFromThread: isFromThread,
-                    myData: myData,
+                    data: widget.post,
+                    commentCount: widget.commentCount,
+                    isFromThread: widget.isFromThread,
+                    myData: widget.myData,
                     // threadItemAction: threadItemAction,
-                    updateMyDataToMain: updateMyDataToMain,
+                    updateMyDataToMain: widget.updateMyDataToMain,
                   ),
                   const SizedBox(height: 4.0),
                   Text(
-                    post['postContent'],
+                    widget.post['postContent'],
                     style: TextStyle(fontSize: 14.0).copyWith(
                         color: Colors.black, fontWeight: FontWeight.w500),
                   ),
-                  post['postImage'] != null
+                  widget.post['postImage'] != null
                       ? const SizedBox.shrink()
                       : const SizedBox(height: 6.0),
                 ],
               ),
             ),
-            post['postImage'] == 'NONE'
+            widget. post['postImage'] == 'NONE'
                 ? const SizedBox.shrink()
                 : Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: CachedNetworkImage(imageUrl: post['postImage']),
+                    child: CachedNetworkImage(
+                      imageUrl: imagepost,
+                      placeholder: (context, imagepost) => Image.asset(
+                        'assets/img/loading_card.gif',
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                      ),
+                      errorWidget: (context, url, error) =>
+                          new Icon(Icons.error),
+                    ),
                   ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: _PostStats(
-                data: post,
+                data: widget.post,
                 //currentData: _currentMyData,
-                commentCount: commentCount,
-                isFromThread: isFromThread,
-                myData: myData,
+                commentCount: widget.commentCount,
+                isFromThread: widget.isFromThread,
+                myData: widget.myData,
+                currentData:  _currentMyData,
+                likeCount: _likeCount,
                 //threadItemAction: threadItemAction,
-                updateMyDataToMain: updateMyDataToMain,
+                updateMyDataToMain: widget.updateMyDataToMain,
                 // likescount: _likeCount
               ),
             ),
@@ -106,8 +133,8 @@ class PostContainer extends StatelessWidget {
 
 class _PostHeader extends StatelessWidget {
   final DocumentSnapshot<Object> data;
-  final Userss myData;
-  final ValueChanged<Userss> updateMyDataToMain;
+  final MyProfileData myData;
+  final ValueChanged<MyProfileData> updateMyDataToMain;
   final bool isFromThread;
   final Function threadItemAction;
   final int commentCount;
@@ -167,11 +194,13 @@ class _PostHeader extends StatelessWidget {
 
 class _PostStats extends StatefulWidget {
   final DocumentSnapshot<Object> data;
-  final Userss myData;
-  final ValueChanged<Userss> updateMyDataToMain;
+  final MyProfileData myData;
+  final ValueChanged<MyProfileData> updateMyDataToMain;
   final bool isFromThread;
   final Function threadItemAction;
   final int commentCount;
+  final MyProfileData currentData;
+  final int likeCount;
   // int likescount;
   //Userss currentData;
 
@@ -184,6 +213,8 @@ class _PostStats extends StatefulWidget {
     @required this.threadItemAction,
     @required this.isFromThread,
     @required this.commentCount,
+    @required this.currentData,
+    @required this.likeCount,
     // @required this.likescount,
   }) : super(key: key);
 
@@ -192,13 +223,13 @@ class _PostStats extends StatefulWidget {
 
 class __PostStatsState extends State<_PostStats> {
   var i = 0;
+  MyProfileData _currentMyDat;
+  int _likeCout;
 
-  Userss _currentMyData;
-  int _likeCount;
   @override
   void initState() {
-    _currentMyData = widget.myData;
-    _likeCount = widget.data['postLikeCount'];
+  _currentMyDat = widget.currentData;
+  _likeCout = widget.likeCount;
     super.initState();
   }
 
@@ -224,11 +255,11 @@ class __PostStatsState extends State<_PostStats> {
             const SizedBox(width: 4.0),
             Expanded(
               child: Text(
-                '${widget.isFromThread ? widget.data['postLikeCount'] : _likeCount}',
+                '${widget.isFromThread ? widget.data['postLikeCount'] : _likeCout}',
                 style: TextStyle(
                   color: Colors.grey[600],
                 ),
-              ),
+              ),  
             ),
             Text(
               '${widget.commentCount} Comments',
@@ -255,8 +286,8 @@ class __PostStatsState extends State<_PostStats> {
                 size: 25.0,
               ),
               label: 'Like',
-              onTap: () => _updateLikeCount(_currentMyData.myLikeList != null &&
-                      _currentMyData.myLikeList.contains(widget.data['postID'])
+              onTap: () => _updateLikeCount(_currentMyDat.myLikeList != null &&
+                      _currentMyDat.myLikeList.contains(widget.data['postID'])
                   ? true
                   : false),
             ),
@@ -287,8 +318,9 @@ class __PostStatsState extends State<_PostStats> {
   }
 
   void _updateLikeCount(bool isLikePost) async {
+    print('nana');
     //data;
-    Userss _newProfileData = await Utils.updateLikeCount(
+    MyProfileData _newProfileData = await Utils.updateLikeCount(
         widget.data,
         widget.myData.myLikeList != null &&
                 widget.myData.myLikeList.contains(widget.data['postID'])
@@ -298,10 +330,10 @@ class __PostStatsState extends State<_PostStats> {
         widget.updateMyDataToMain,
         true);
     setState(() {
-      _currentMyData = _newProfileData;
+      _currentMyDat = _newProfileData;
     });
     setState(() {
-      isLikePost ? _likeCount-- : _likeCount++;
+      isLikePost ? _likeCout-- : _likeCout++;
     });
   }
 }

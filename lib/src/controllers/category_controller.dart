@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -11,6 +12,7 @@ import '../models/product.dart';
 import '../repository/cart_repository.dart';
 import '../repository/category_repository.dart';
 import '../repository/product_repository.dart';
+import 'check_network/network_controller.dart';
 
 class CategoryController extends ControllerMVC {
   List<Product> products = <Product>[];
@@ -19,8 +21,10 @@ class CategoryController extends ControllerMVC {
   bool loadCart = false;
   List<Cart> carts = [];
 
+  final CreateNetworkController _networkController =
+      Get.find<CreateNetworkController>();
   var infoColor = Color(0xFFFFC001);
-  var errorColor = Color(0xFFDE3F44);
+  var errorColor = Color(0xFFCCCCCC);
 
   CategoryController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -33,40 +37,20 @@ class CategoryController extends ControllerMVC {
         products.add(_product);
       });
     }, onError: (a) {
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: errorColor,
-            messageText: Text(
-              '${S.of(Get.context).verify_your_internet_connection}',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+     getSnackbarNotification(messages, request, button, route);
     }, onDone: () {
       if (message != null) {
-        Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: Theme.of(Get.context).secondaryHeaderColor,
-            messageText: Text(
-              message,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      // final messages = "";
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(message, request, button, route);
       }
     });
   }
@@ -77,40 +61,20 @@ class CategoryController extends ControllerMVC {
       setState(() => category = _category);
     }, onError: (a) {
       print(a);
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: errorColor,
-            messageText: Text(
-              S.of(Get.context).verify_your_internet_connection,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+     getSnackbarNotification(messages, request, button, route);
     }, onDone: () {
       if (message != null) {
-        Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: Theme.of(Get.context).secondaryHeaderColor,
-            messageText: Text(
-              message,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+        // final messages = "";
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(message, request, button, route);
       }
     });
   }
@@ -146,22 +110,12 @@ class CategoryController extends ControllerMVC {
           this.loadCart = false;
         });
       }).whenComplete(() {
-        Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: Theme.of(Get.context).secondaryHeaderColor,
-            messageText: Text(
-              S.of(Get.context).this_product_was_added_to_cart,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = S.of(Get.context).this_product_was_added_to_cart;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
       });
     } else {
       // the product doesnt exist in the cart add new one
@@ -172,22 +126,12 @@ class CategoryController extends ControllerMVC {
       }).whenComplete(() {
         if (reset) carts.clear();
         carts.add(_newCart);
-        Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: Theme.of(Get.context).secondaryHeaderColor,
-            messageText: Text(
-              S.of(Get.context).this_product_was_added_to_cart,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = S.of(Get.context).this_product_was_added_to_cart;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
       });
     }
   }

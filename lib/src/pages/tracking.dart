@@ -91,7 +91,7 @@ class _TrackingWidgetState extends StateMVC<TrackingWidget>
                       onPressed: () {
                         Navigator.of(context).pushNamed('/Reviews',
                             arguments: RouteArgument(
-                                id: _con.order.id, heroTag: "restaurant_reviews"));
+                                id: _con.order.id, heroTag: "store_reviews"));
                       },
                       padding: EdgeInsets.symmetric(vertical: 5),
                       shape: StadiumBorder(),

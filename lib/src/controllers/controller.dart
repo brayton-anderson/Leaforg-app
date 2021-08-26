@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-
+import '../elements/CreateStoriesWidget.dart' as storiesRepo;
 import '../repository/settings_repository.dart' as settingRepo;
 import '../repository/user_repository.dart' as userRepo;
 
@@ -16,6 +16,9 @@ class Controller extends AppConMVC {
     settingRepo.initSettings();
     settingRepo.getCurrentLocation();
     userRepo.getCurrentUser();
+    storiesRepo.getCurrentColors();
+    storiesRepo.getCurrentGradients();
+    storiesRepo.getCurrentShadowColors();
     super.initState();
   }
 }

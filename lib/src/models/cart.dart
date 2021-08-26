@@ -17,8 +17,8 @@ class Cart {
       id = jsonMap['id'].toString();
       quantity =
           jsonMap['quantity'] != null ? jsonMap['quantity'].toDouble() : 0.0;
-      product = jsonMap['food'] != null
-          ? Product.fromJSON(jsonMap['food'])
+      product = jsonMap['product'] != null
+          ? Product.fromJSON(jsonMap['product'])
           : Product.fromJSON({});
       extras = jsonMap['extras'] != null
           ? List.from(jsonMap['extras'])
@@ -38,7 +38,7 @@ class Cart {
     var map = new Map<String, dynamic>();
     map["id"] = id;
     map["quantity"] = quantity;
-    map["food_id"] = product.id;
+    map["product_id"] = product.id;
     map["user_id"] = userId;
     map["extras"] = extras.map((element) => element.id).toList();
     return map;

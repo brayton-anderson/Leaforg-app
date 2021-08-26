@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart' show DateFormat;
+import '../helpers/snackbar_notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -8,14 +9,17 @@ import '../helpers/helper.dart';
 import '../models/order.dart';
 import '../models/order_status.dart';
 import '../repository/order_repository.dart';
+import 'check_network/network_controller.dart';
 
 class TrackingController extends ControllerMVC {
   Order order;
   List<OrderStatus> orderStatus = <OrderStatus>[];
   GlobalKey<ScaffoldState> scaffoldKey;
 
+  final CreateNetworkController _networkController =
+      Get.find<CreateNetworkController>();
   var infoColor = Color(0xFFFFC001);
-  var errorColor = Color(0xFFDE3F44);
+  var errorColor = Color(0xFFCCCCCC);
   var successColor = Theme.of(Get.context).secondaryHeaderColor;
 
   TrackingController() {
@@ -30,39 +34,22 @@ class TrackingController extends ControllerMVC {
       });
     }, onError: (a) {
       print(a);
-      Get.snackbar(
-        "Hi",
-        "Leaforg",
-        showProgressIndicator: false,
-        duration: Duration(seconds: 5),
-        snackStyle: SnackStyle.FLOATING,
-        maxWidth: MediaQuery.of(Get.context).size.width - 200,
-        backgroundColor: errorColor,
-        messageText: Text(
-          S.of(Get.context).verify_your_internet_connection,
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-      );
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+      getSnackbarNotification(messages, request, button, route);
     }, onDone: () {
       listenForOrderStatus();
       if (message != null) {
-        Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: infoColor,
-            messageText: Text(
-              message,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+        //final color = infoColor;
+        //final messages = message;
+        final button = "";
+        final route = "";
+        final request = "info_snack";
+
+        getSnackbarNotification(message, request, button, route);
       }
     });
   }
@@ -114,41 +101,23 @@ class TrackingController extends ControllerMVC {
         this.order.active = false;
       });
     }).catchError((e) {
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: errorColor,
-            messageText: Text(
-              e,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      //final color = infoColor;
+        //final messages = message;
+        final button = "";
+        final route = "";
+        final request = "error_snack";
+
+        getSnackbarNotification(e, request, button, route);
     }).whenComplete(() {
       orderStatus = [];
       listenForOrderStatus();
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: infoColor,
-            messageText: Text(
-              S.of(Get.context).orderThisorderidHasBeenCanceled(this.order.id),
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      //final color = infoColor;
+        final messages = S.of(Get.context).orderThisorderidHasBeenCanceled(this.order.id);
+        final button = "";
+        final route = "";
+        final request = "info_snack";
+
+        getSnackbarNotification(messages, request, button, route);
     });
   }
 

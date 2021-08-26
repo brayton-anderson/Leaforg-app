@@ -3,18 +3,16 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
-import '../models/data_models.dart';
+import 'current_user_card.dart';
 import '../widgets/widgets.dart';
 
 class CustomAppBar extends StatelessWidget {
-  final User currentUser;
   final List<IconData> icons;
   final int selectedIndex;
   final Function(int) onTap;
 
   const CustomAppBar({
     Key key,
-    @required this.currentUser,
     @required this.icons,
     @required this.selectedIndex,
     @required this.onTap,
@@ -40,20 +38,22 @@ class CustomAppBar extends StatelessWidget {
         children: [
           Container(
             alignment: Alignment.centerLeft,
-            height: 100,
-            width: 100,
+            height: 70,
+            width: 70,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10),
               ),
-              image: DecorationImage(
-                image: AssetImage("assets/img/leaforg_icon_green.png"),
-                fit: BoxFit.contain,
-                alignment: Alignment.topLeft,
-              ),
               color: Colors.transparent,
             ),
+            child: SizedBox(
+                height: 60,
+                child: CircleAvatar(
+                  radius: 40,
+                  child: Image.asset('assets/img/leaforg_icon_green.png'),
+                  backgroundColor: Colors.transparent,
+                )),
           ),
           SizedBox(
             width: 100,
@@ -66,16 +66,16 @@ class CustomAppBar extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Theme.of(context).focusColor.withOpacity(0.1),
-                          blurRadius: 7,
-                          offset: Offset(0, 3)),
-                    ],
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //       color: Theme.of(context).focusColor.withOpacity(0.1),
+                    //       blurRadius: 7,
+                    //       offset: Offset(0, 3)),
+                    // ],
                     border: Border.all(
                         width: 0.2,
                         color: Theme.of(context).splashColor.withOpacity(0.18)),
-                    color: Theme.of(context).splashColor.withOpacity(0.05)),
+                    color: Theme.of(context).splashColor.withOpacity(0.19)),
                 child: Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -122,7 +122,7 @@ class CustomAppBar extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                UserCard(),
+                CurrentUserCard(),
                 const SizedBox(width: 12.0),
                 Stack(alignment: Alignment.topCenter, children: [
                   CircleButton(
@@ -131,8 +131,8 @@ class CustomAppBar extends StatelessWidget {
                     onPressed: () => print('Search'),
                   ),
                   Container(
-                    height: 20.0,
-                    width: 20.0,
+                    height: 30.0,
+                    width: 30.0,
                     alignment: Alignment.topRight,
                     decoration: BoxDecoration(
                       color: Colors.redAccent,
@@ -144,7 +144,7 @@ class CustomAppBar extends StatelessWidget {
                     ),
                     child: Center(
                         child: Text(
-                      '9+',
+                      '20+',
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 12,
@@ -160,8 +160,8 @@ class CustomAppBar extends StatelessWidget {
                     onPressed: () => print('Messenger'),
                   ),
                   Container(
-                    height: 20.0,
-                    width: 20.0,
+                    height: 30.0,
+                    width: 30.0,
                     alignment: Alignment.topRight,
                     decoration: BoxDecoration(
                       color: Colors.redAccent,
@@ -173,7 +173,7 @@ class CustomAppBar extends StatelessWidget {
                     ),
                     child: Center(
                         child: Text(
-                      '9+',
+                      '20+',
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 12,

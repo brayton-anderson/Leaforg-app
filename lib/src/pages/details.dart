@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import '../helpers/responcive_app.dart';
 import '../helpers/responsive.dart';
 import '../shared/page_body.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
@@ -397,11 +398,10 @@ class _DetailsWidgetState extends StateMVC<DetailsWidget> {
                                         },
                                         gridDelegate:
                                             SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: checkingDevice(
-                                                            mediaQuery) ==
-                                                        "mobile"
-                                                    ? 2
-                                                    : 4,
+                                                crossAxisCount: Responsive.isMobile(context)
+                                                    ? 1
+                                                    : Responsive.isTablet(context)
+                                                    ?2: 4,
                                                 crossAxisSpacing:
                                                     checkingDevice(
                                                                 mediaQuery) ==

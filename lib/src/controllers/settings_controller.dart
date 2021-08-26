@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -25,40 +26,24 @@ class SettingsController extends ControllerMVC {
     user.deviceToken = null;
     repository.update(user).then((value) {
       setState(() {});
-      Get.snackbar(
-        "Hi",
-        "Leaforg",
-        showProgressIndicator: false,
-        duration: Duration(seconds: 5),
-        snackStyle: SnackStyle.FLOATING,
-        maxWidth: MediaQuery.of(Get.context).size.width - 200,
-        backgroundColor: successColor,
-        messageText: Text(
-         S.of(Get.context).profile_settings_updated_successfully,
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-      );
+      final messages = S.of(Get.context).profile_settings_updated_successfully;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 
   void updateCreditCard(CreditCard creditCard) {
     repository.setCreditCard(creditCard).then((value) {
       setState(() {});
-      Get.snackbar(
-        "Hi",
-        "Leaforg",
-        showProgressIndicator: false,
-        duration: Duration(seconds: 5),
-        snackStyle: SnackStyle.FLOATING,
-        maxWidth: MediaQuery.of(Get.context).size.width - 200,
-        backgroundColor: successColor,
-        messageText: Text(
-         S.of(Get.context).payment_settings_updated_successfully,
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-      );
+      final messages = S.of(Get.context).payment_settings_updated_successfully;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 

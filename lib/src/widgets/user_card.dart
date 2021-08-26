@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../repository/user_repository.dart';
-import '../widgets/widgets.dart';
+import 'story_profile_avatar.dart';
+import '../models/userstories.dart';
 
 class UserCard extends StatelessWidget {
-  
-
+  final StoriesuserModel users;
   const UserCard({
     Key key,
+    this.users,
   }) : super(key: key);
 
   @override
@@ -16,11 +16,13 @@ class UserCard extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ProfileAvatar(),
+          StoryProfileAvatar(
+            users: users,
+          ),
           const SizedBox(width: 6.0),
           Flexible(
             child: Text(
-              currentUser.value.name,
+              users.user_name,
               style: const TextStyle(fontSize: 16.0)
                   .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
               overflow: TextOverflow.ellipsis,

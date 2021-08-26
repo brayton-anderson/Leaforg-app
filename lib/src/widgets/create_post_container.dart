@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:get/get.dart';
+import 'package:leaforgapp/src/repository/stories_repository.dart';
 import '../controllers/community_controlers/create_postsandstories_dialog.dart';
 import '../widgets/widgets.dart';
 
 class CreatePostContainer extends GetView<CreatePostDialogController> {
- //final User myData;
+  //final User myData;
   final controller = Get.put(CreatePostDialogController());
 
   CreatePostContainer({
@@ -28,7 +29,7 @@ class CreatePostContainer extends GetView<CreatePostDialogController> {
           children: [
             Row(
               children: [
-               // ProfileAvatar(imageUrl: currentUser.imageUrl),
+                // ProfileAvatar(imageUrl: currentUser.imageUrl),
                 const SizedBox(width: 8.0),
                 Expanded(
                   child: GestureDetector(
@@ -37,9 +38,9 @@ class CreatePostContainer extends GetView<CreatePostDialogController> {
                       //print('nanana');
                     },
                     child: Container(
-                        color: Colors.transparent,
-                        child: Center( 
-                          child: Row(
+                      color: Colors.transparent,
+                      child: Center(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -55,10 +56,8 @@ class CreatePostContainer extends GetView<CreatePostDialogController> {
                             ),
                           ],
                         ),
-                        ),
-                       
-
-                        ),
+                      ),
+                    ),
                   ),
                 )
               ],
@@ -70,7 +69,7 @@ class CreatePostContainer extends GetView<CreatePostDialogController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FlatButton.icon(
-                    onPressed: () => print('Photo'),
+                    onPressed: () => print('hello'),
                     icon: const Icon(
                       PhosphorIcons.image_fill,
                       color: Color(0xFFFFAA00),

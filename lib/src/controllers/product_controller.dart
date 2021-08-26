@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -9,6 +10,7 @@ import '../models/favorite.dart';
 import '../models/product.dart';
 import '../repository/cart_repository.dart';
 import '../repository/product_repository.dart';
+import 'check_network/network_controller.dart';
 
 class ProductController extends ControllerMVC {
   Product product;
@@ -18,8 +20,10 @@ class ProductController extends ControllerMVC {
   Favorite favorite;
   bool loadCart = false;
   GlobalKey<ScaffoldState> scaffoldKey;
+  final CreateNetworkController _networkController =
+      Get.find<CreateNetworkController>();
   var infoColor = Color(0xFFFFC001);
-  var errorColor = Color(0xFFDE3F44);
+  var errorColor = Color(0xFFCCCCCC);
   var successColor = Theme.of(Get.context).secondaryHeaderColor;
 
   ProductController() {
@@ -32,37 +36,21 @@ class ProductController extends ControllerMVC {
       setState(() => product = _product);
     }, onError: (a) {
       print(a);
-      Get.snackbar(
-        "Hi",
-        "Leaforg",
-        showProgressIndicator: false,
-        duration: Duration(seconds: 5),
-        snackStyle: SnackStyle.FLOATING,
-        maxWidth: MediaQuery.of(Get.context).size.width - 200,
-        backgroundColor: errorColor,
-        messageText: Text(
-          S.of(Get.context).verify_your_internet_connection,
-          style: TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-      );
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+     getSnackbarNotification(messages, request, button, route);
     }, onDone: () {
       calculateTotal();
       if (message != null) {
-        Get.snackbar(
-          "Hi",
-          "Leaforg",
-          showProgressIndicator: false,
-          duration: Duration(seconds: 5),
-          snackStyle: SnackStyle.FLOATING,
-          maxWidth: MediaQuery.of(Get.context).size.width - 200,
-          backgroundColor: successColor,
-          messageText: Text(
-            message,
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-          ),
-        );
+        final messages = message;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
       }
     });
   }
@@ -108,20 +96,12 @@ class ProductController extends ControllerMVC {
           this.loadCart = false;
         });
       }).whenComplete(() {
-        Get.snackbar(
-          "Hi",
-          "Leaforg",
-          showProgressIndicator: false,
-          duration: Duration(seconds: 5),
-          snackStyle: SnackStyle.FLOATING,
-          maxWidth: MediaQuery.of(Get.context).size.width - 200,
-          backgroundColor: successColor,
-          messageText: Text(
-            S.of(Get.context).this_product_was_added_to_cart,
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-          ),
-        );
+        final messages = S.of(Get.context).this_product_was_added_to_cart;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
       });
     } else {
       // the product doesnt exist in the cart add new one
@@ -130,20 +110,12 @@ class ProductController extends ControllerMVC {
           this.loadCart = false;
         });
       }).whenComplete(() {
-        Get.snackbar(
-          "Hi",
-          "Leaforg",
-          showProgressIndicator: false,
-          duration: Duration(seconds: 5),
-          snackStyle: SnackStyle.FLOATING,
-          maxWidth: MediaQuery.of(Get.context).size.width - 200,
-          backgroundColor: successColor,
-          messageText: Text(
-            S.of(Get.context).this_product_was_added_to_cart,
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-          ),
-        );
+        final messages = S.of(Get.context).this_product_was_added_to_cart;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
       });
     }
   }
@@ -163,20 +135,12 @@ class ProductController extends ControllerMVC {
       setState(() {
         this.favorite = value;
       });
-      Get.snackbar(
-          "Hi",
-          "Leaforg",
-          showProgressIndicator: false,
-          duration: Duration(seconds: 5),
-          snackStyle: SnackStyle.FLOATING,
-          maxWidth: MediaQuery.of(Get.context).size.width - 200,
-          backgroundColor: successColor,
-          messageText: Text(
-            S.of(Get.context).thisProductWasAddedToFavorite,
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-          ),
-        );
+      final messages = S.of(Get.context).thisProductWasAddedToFavorite;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 
@@ -185,20 +149,12 @@ class ProductController extends ControllerMVC {
       setState(() {
         this.favorite = new Favorite();
       });
-      Get.snackbar(
-          "Hi",
-          "Leaforg",
-          showProgressIndicator: false,
-          duration: Duration(seconds: 5),
-          snackStyle: SnackStyle.FLOATING,
-          maxWidth: MediaQuery.of(Get.context).size.width - 200,
-          backgroundColor: infoColor,
-          messageText: Text(
-            S.of(Get.context).thisProductWasRemovedFromFavorites,
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
-          ),
-        );
+      final messages = S.of(Get.context).thisProductWasRemovedFromFavorites;
+      final button = "";
+      final route = "";
+      final request = "info_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 

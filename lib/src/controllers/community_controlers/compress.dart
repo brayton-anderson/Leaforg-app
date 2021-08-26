@@ -1,32 +1,28 @@
 import 'dart:async' show Future;
-import 'dart:io' show File;
+//import 'dart:html' as webFile;
+import 'dart:io';
 import 'package:flutter/foundation.dart' show compute;
-import 'package:flutter/material.dart' show BuildContext;
+import 'package:flutter/material.dart'
+    show BuildContext;
 import 'package:image/image.dart' as Im;
 import 'package:image_picker/image_picker.dart';
 
-Future<File> takeCompressedPicture(BuildContext context) async {
+Future takeCompressedPicture(BuildContext context) async {
   final temp = (await ImagePicker()
       .pickImage(source: ImageSource.gallery, imageQuality: 50));
-  File _imageFile = File(temp.path);
-  //final imageForSendToAPI = await temp.readAsBytes();
-  // final _imagexFile =
-  //     await ImagePicker().pickImage(source: ImageSource.gallery);
-  // File _imageFile = File(_imagexFile.path);
-  // // File _imageFile = convertToFile(_image);
-  // if (_imageFile == null) {
-  //   return null;
-  // }
-
-  //final tempDir = await getTemporaryDirectory();
-  // final rand = Math.Random().nextInt(10000);
-  // _CompressObject compressObject =
-  //     _CompressObject(_imageFile, _imagexFile.path, rand);
-  // String filePath = await _compressImage(compressObject);
-  // print('new path: ' + filePath);
-  // File file = File(filePath);
-
-  // Pop loading
+  final _imageFile = await temp.readAsBytes();
+  //final image = Uint8List.fromList(_imageFile);
+ // webFile.File _imageFile =  webFile.File(temp.path);
+  // ImageProvider provider = MemoryImage(Uint8List.fromList(_imageFile));
+  // var _imageFileresult = await FlutterImageCompress.compressWithList(
+  //   image,
+  //   minHeight: 500,
+  //   minWidth: 262,
+  //   quality: 70,
+  //   rotate: 0,
+  //   autoCorrectionAngle: true,
+  //   format: CompressFormat.jpeg,
+  // );
 
   return _imageFile;
 }

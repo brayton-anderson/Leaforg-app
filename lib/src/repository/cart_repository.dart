@@ -18,7 +18,7 @@ Future<Stream<Cart>> getCart() async {
   }
   final String _apiToken = 'api_token=${_user.apiToken}&';
   final String url =
-      '${GlobalConfiguration().getString('api_base_url')}carts?${_apiToken}with=food;food.restaurant;extras&search=user_id:${_user.id}&searchFields=user_id:=';
+      '${GlobalConfiguration().getString('api_base_url')}carts?${_apiToken}with=product;product.store;extras&search=user_id:${_user.id}&searchFields=user_id:=';
 
   final client = new http.Client();
   final streamedRest = await client.send(http.Request('get', Uri.parse(url)));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 
 import '../../generated/l10n.dart';
 import '../models/address.dart' as model;
@@ -32,22 +33,12 @@ class DeliveryPickupController extends CartController {
         this.deliveryAddress = value;
       });
     }).whenComplete(() {
-       Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: Theme.of(Get.context).secondaryHeaderColor,
-            messageText: Text(
-              '${S.of(Get.context).new_address_added_successfully}',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = S.of(Get.context).new_address_added_successfully;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 
@@ -58,22 +49,12 @@ class DeliveryPickupController extends CartController {
         this.deliveryAddress = value;
       });
     }).whenComplete(() {
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: Theme.of(Get.context).secondaryHeaderColor,
-            messageText: Text(
-              '${S.of(Get.context).the_address_updated_successfully}',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = S.of(Get.context).the_address_updated_successfully;
+      final button = "";
+      final route = "";
+      final request = "success_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 

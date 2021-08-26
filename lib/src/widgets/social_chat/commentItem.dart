@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../../elements/social/const.dart';
 import '../../models/user.dart';
 import '../../elements/social/utils.dart';
 
 class CommentItem extends StatefulWidget {
   final DocumentSnapshot data;
-  final Userss myData;
+  final MyProfileData myData;
   final Size size;
-  final ValueChanged<Userss> updateMyDataToMain;
+  final ValueChanged<MyProfileData> updateMyDataToMain;
   final ValueChanged<List<String>> replyComment;
   CommentItem(
       {this.data,
@@ -20,7 +21,7 @@ class CommentItem extends StatefulWidget {
 }
 
 class _CommentItem extends State<CommentItem> {
-  Userss _currentMyData;
+  MyProfileData _currentMyData;
   @override
   void initState() {
     _currentMyData = widget.myData;
@@ -28,7 +29,7 @@ class _CommentItem extends State<CommentItem> {
   }
 
   void _updateLikeCount(bool isLikePost) async {
-    Userss _newProfileData = await Utils.updateLikeCount(widget.data,
+    MyProfileData _newProfileData = await Utils.updateLikeCount(widget.data,
         isLikePost, widget.myData, widget.updateMyDataToMain, false);
     setState(() {
       _currentMyData = _newProfileData;

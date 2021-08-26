@@ -49,7 +49,7 @@ class _ViewStoriesScreenState extends State<ViewStoriesScreen> {
             Positioned.fill(
               child: Container(
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(60)),
+                    borderRadius: BorderRadius.all(Radius.circular(7)),
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         alignment: Alignment.center,

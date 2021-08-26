@@ -13,8 +13,8 @@ class Favorite {
   Favorite.fromJSON(Map<String, dynamic> jsonMap) {
     try {
       id = jsonMap['id'] != null ? jsonMap['id'].toString() : null;
-      product = jsonMap['food'] != null
-          ? Product.fromJSON(jsonMap['food'])
+      product = jsonMap['products'] != null
+          ? Product.fromJSON(jsonMap['products'])
           : Product.fromJSON({});
       extras = jsonMap['extras'] != null
           ? List.from(jsonMap['extras'])
@@ -32,7 +32,7 @@ class Favorite {
   Map toMap() {
     var map = new Map<String, dynamic>();
     map["id"] = id;
-    map["food_id"] = product.id;
+    map["product_id"] = product.id;
     map["user_id"] = userId;
     map["extras"] = extras.map((element) => element.id).toList();
     return map;

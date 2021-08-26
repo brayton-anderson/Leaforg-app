@@ -16,10 +16,12 @@ class Degradable {
     try {
       id = jsonMap['id'].toString();
       name = jsonMap['name'];
-      description = jsonMap['description'];
-      product = jsonMap['stores'] != null
-          ? Product.fromJSON(jsonMap['stores'])
-          : Product.fromJSON({});
+      description =
+          jsonMap['description'] != null ? jsonMap['description'] : "";
+      product =
+          jsonMap['stores'] != null && (jsonMap['stores'] as List).length > 0
+              ? Product.fromJSON(jsonMap['stores'][0])
+              : Product.fromJSON({});
       image = jsonMap['media'] != null && (jsonMap['media'] as List).length > 0
           ? Media.fromJSON(jsonMap['media'][0])
           : new Media();
@@ -40,6 +42,4 @@ class Degradable {
     map["description"] = description;
     return map;
   }
-
-
 }

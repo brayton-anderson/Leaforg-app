@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 import '../models/store_categories.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -14,6 +15,7 @@ import '../repository/product_repository.dart';
 import '../repository/gallery_repository.dart';
 import '../repository/store_repository.dart';
 import '../repository/settings_repository.dart';
+import 'check_network/network_controller.dart';
 
 class StoreController extends ControllerMVC {
   Store store;
@@ -27,8 +29,10 @@ class StoreController extends ControllerMVC {
   List<Review> reviews = <Review>[];
   GlobalKey<ScaffoldState> scaffoldKey;
 
+  final CreateNetworkController _networkController =
+      Get.find<CreateNetworkController>();
   var infoColor = Color(0xFFFFC001);
-  var errorColor = Color(0xFFDE3F44);
+  var errorColor = Color(0xFFCCCCCC);
   var successColor = Theme.of(Get.context).secondaryHeaderColor;
 
   //BuildContext context;
@@ -36,7 +40,6 @@ class StoreController extends ControllerMVC {
   StoreController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
   }
-
 
   // get currentState => null;
 
@@ -46,41 +49,22 @@ class StoreController extends ControllerMVC {
       setState(() => store = _store);
     }, onError: (a) {
       print(a);
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: errorColor,
-            messageText: Text(
-              S.of(Get.context).verify_your_internet_connection,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+      getSnackbarNotification(messages, request, button, route);
     }, onDone: () {
       if (message != null) {
-        Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: infoColor,
-            messageText: Text(
-              message,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
-        
+        //final color = infoColor;
+        //final messages = message;
+        final button = "";
+        final route = "";
+        final request = "info_snack";
+
+        getSnackbarNotification(message, request, button, route);
       }
     });
   }
@@ -151,7 +135,8 @@ class StoreController extends ControllerMVC {
     galleries.clear();
     reviews.clear();
     featuredProducts.clear();
-    listenForStore(id: _id, message: S.of(Get.context).store_refreshed_successfuly);
+    listenForStore(
+        id: _id, message: S.of(Get.context).store_refreshed_successfuly);
     listenForStoreReviews(id: _id);
     listenForGalleries(_id);
     listenForFeaturedProducts(_id);

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../helpers/snackbar_notifications.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../generated/l10n.dart';
@@ -12,6 +13,7 @@ import '../repository/cart_repository.dart';
 import '../repository/coupon_repository.dart';
 import '../repository/settings_repository.dart';
 import '../repository/user_repository.dart';
+import 'check_network/network_controller.dart';
 
 class CartController extends ControllerMVC {
   List<Cart> carts = <Cart>[];
@@ -22,8 +24,10 @@ class CartController extends ControllerMVC {
   double total = 0.0;
   GlobalKey<ScaffoldState> scaffoldKey;
 
+  final CreateNetworkController _networkController =
+      Get.find<CreateNetworkController>();
   var infoColor = Color(0xFFFFC001);
-  var errorColor = Color(0xFFDE3F44);
+  var errorColor = Color(0xFFCCCCCC);
   var successColor = Theme.of(Get.context).secondaryHeaderColor;
 
   CartController() {
@@ -42,43 +46,22 @@ class CartController extends ControllerMVC {
       }
     }, onError: (a) {
       print(a);
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: errorColor,
-            messageText: Text(
-              S.of(Get.context).verify_your_internet_connection,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+     getSnackbarNotification(messages, request, button, route);
     }, onDone: () {
       if (carts.isNotEmpty) {
         calculateSubtotal();
       }
       if (message != null) {
-        Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: infoColor,
-            messageText: Text(
-              message,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+       // final messages = "";
+       final button = "";
+      final route = "";
+      final request = "info_snack";
+     getSnackbarNotification(message, request, button, route);
       }
       onLoadingCartDone();
     });
@@ -94,22 +77,13 @@ class CartController extends ControllerMVC {
       });
     }, onError: (a) {
       print(a);
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: errorColor,
-            messageText: Text(
-              S.of(Get.context).verify_your_internet_connection,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+     getSnackbarNotification(messages, request, button, route);
+
     });
   }
 
@@ -126,22 +100,12 @@ class CartController extends ControllerMVC {
     });
     removeCart(_cart).then((value) {
       calculateSubtotal();
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: infoColor,
-            messageText: Text(
-              S.of(Get.context).the_product_was_removed_from_your_cart(_cart.product.name),
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final button = "";
+      final route = "";
+      final messages = S.of(Get.context).the_product_was_removed_from_your_cart(_cart.product.name);
+      final request = "info_snack";
+
+     getSnackbarNotification(messages, request, button, route);
     });
   }
 
@@ -172,22 +136,12 @@ class CartController extends ControllerMVC {
       coupon = _coupon;
     }, onError: (a) {
       print(a);
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: errorColor,
-            messageText: Text(
-              S.of(Get.context).verify_your_internet_connection,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = "";
+      final button = "";
+      final route = "";
+      final request = "check internet";
+
+     getSnackbarNotification(messages, request, button, route);
     }, onDone: () {
       listenForCarts();
 //      saveCoupon(currentCoupon).then((value) => {
@@ -213,63 +167,20 @@ class CartController extends ControllerMVC {
 
   void goCheckout(BuildContext context) {
     if (!currentUser.value.profileCompleted()) {
-      Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: errorColor,
-            messageText: Text(
-              S.of(Get.context).verify_your_internet_connection,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-            mainButton: TextButton(
-                            onPressed: () {
-            Navigator.of(Get.context).pushNamed('/Settings');
-          } , 
-              child: Container(
-                
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(Get.context).secondaryHeaderColor,
-                  
-                ),
-                child: Center(
-                  child: Text( S.of(Get.context).settings,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500
-                  ),
+      final messages = "";
+      final button = S.of(Get.context).settings;
+      final route = "/Settings";
+      final request = "check internet_button";
 
-                  ),
-                ),
-              ),
-              ),
-          );
+     getSnackbarNotification(messages, request, button, route);
     } else {
       if (carts[0].product.store.closed) {
-        Get.snackbar(
-            "Hi",
-            "Leaforg",
-            showProgressIndicator: false,
-            duration: Duration(seconds: 5),
-            snackStyle: SnackStyle.FLOATING,
-            maxWidth: MediaQuery.of(Get.context).size.width - 200,
-            backgroundColor: infoColor,
-            messageText: Text(
-              S.of(Get.context).this_store_is_closed_,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500),
-            ),
-          );
+      final messages = S.of(Get.context).this_store_is_closed_;
+      final button = "";
+      final route = "";
+      final request = "info_snack";
+
+     getSnackbarNotification(messages, request, button, route);
       } else {
         Navigator.of(Get.context).pushNamed('/DeliveryPickup');
       }

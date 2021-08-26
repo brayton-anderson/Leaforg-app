@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:adv_fab/adv_fab.dart';
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 
 import '../elements/DrawerWidget.dart';
 import '../elements/FilterWidget.dart';
@@ -99,242 +101,53 @@ class _PagesWidgetState extends State<PagesWidget> {
   // big_tab_app
   // desktop_web
   // desktop_app
-  String _reas = checkingDevicePlatform();
 
   @override
   Widget build(BuildContext context) {
-    print("${_reas}");
-    return _reas == 'desktop_web'
-        ? WillPopScope(
-            onWillPop: Helper.of(context).onWillPop,
-            child: Scaffold(
-              key: widget.scaffoldKey,
-              drawer: DrawerWidget(),
-              endDrawer: FilterWidget(onFilter: (filter) {
-                Navigator.of(context).pushReplacementNamed('/Pages',
-                    arguments: widget.currentTab);
-              }),
-              body: widget.currentPage,
-
-              ///[SEtting up the floating action button]
-              floatingActionButton: AdvFab(
-                showLogs: true,
-                onFloatingActionButtonTapped: () {
-                  useAsFloatingActionButton = false;
-                  useNavigationBar = true;
-                  if (mounted) {
-                    setState(() {});
-                  }
-                  new Timer(Duration(seconds: 4), () {
-                    useAsFloatingActionButton = true;
-                useNavigationBar = false;
-                  if (mounted) {
-                    setState(() {});
-                  }
-                  });
-                },
-                floatingActionButtonIcon: Icons.add,
-                floatingActionButtonIconColor: Colors.white,
-                navigationBarIconActiveColor: Color(0xFF004E15),
-                navigationBarIconInactiveColor: Colors.white,
-                collapsedColor: Color(0xFFFFAA00),
-                useAsNavigationBar: useNavigationBar,
-                useAsFloatingActionButton: useAsFloatingActionButton,
-                controller: mabialaFABController,
-                animationDuration: Duration(milliseconds: 350),
-                navigationBarIcons: [
-                  AdvFabNavigationBarIcon(
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/Pages', arguments: 0);
-                    },
-                    title: 'Notifications',
-                    icon: Icons.notifications,
-                  ),
-                  AdvFabNavigationBarIcon(
-                    onTap: () {
-                      Navigator.of(context).pushReplacementNamed('/Pages',
-                          arguments: widget.routeArgument);
-                    },
-                    title: 'Maps',
-                    icon: Icons.location_on,
-                  ),
-                  AdvFabNavigationBarIcon(
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/Pages', arguments: 2);
-                    },
-                    title: 'Home',
-                    icon: Icons.home,
-                  ),
-                  AdvFabNavigationBarIcon(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed('/Pages', arguments: 3);
-                      },
-                      title: 'Stores',
-                      icon: Icons.store),
-                  AdvFabNavigationBarIcon(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushReplacementNamed('/Pages', arguments: 4);
-                        setState(() {});
-                      },
-                      title: 'Favorites',
-                      icon: Icons.favorite),
-                ],
-              ),
+    return WillPopScope(
+      onWillPop: Helper.of(context).onWillPop,
+      child: Scaffold(
+        key: widget.scaffoldKey,
+        drawer: DrawerWidget(),
+        endDrawer: FilterWidget(onFilter: (filter) {
+          Navigator.of(context)
+              .pushReplacementNamed('/Pages', arguments: widget.currentTab);
+        }),
+        body: widget.currentPage,
+        bottomNavigationBar: FancyBottomNavigation(
+          tabs: [
+            TabData(
+              iconData: PhosphorIcons.bell_ringing_fill,
+              title: 'Notifications',
             ),
-          )
-        : _reas == 'desktop_app'
-            ? WillPopScope(
-                onWillPop: Helper.of(context).onWillPop,
-                child: Scaffold(
-                  key: widget.scaffoldKey,
-                  drawer: DrawerWidget(),
-                  endDrawer: FilterWidget(onFilter: (filter) {
-                    Navigator.of(context).pushReplacementNamed('/Pages',
-                        arguments: widget.currentTab);
-                  }),
-                  body: widget.currentPage,
-                  bottomNavigationBar: BottomNavigationBar(
-                    type: BottomNavigationBarType.fixed,
-                    selectedItemColor: Theme.of(context).shadowColor,
-                    selectedFontSize: 0,
-                    unselectedFontSize: 0,
-                    iconSize: 22,
-                    elevation: 0,
-                    backgroundColor: Theme.of(context).hintColor,
-                    selectedIconTheme: IconThemeData(size: 28),
-                    unselectedItemColor:
-                        Theme.of(context).focusColor.withOpacity(1),
-                    currentIndex: widget.currentTab,
-
-                    onTap: (int i) {
-                      this._selectTab(i);
-                    },
-                    // this will be set when a new tab is tapped
-                    items: [
-                      BottomNavigationBarItem(
-                        label: '',
-                        icon: Icon(
-                          Icons.notifications,
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                        activeIcon: new Container(height: 0.0),
-                      ),
-                      BottomNavigationBarItem(
-                        label: '',
-                        icon: Icon(
-                          Icons.location_on,
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                        activeIcon: new Container(height: 0.0),
-                      ),
-                      BottomNavigationBarItem(
-                          label: '',
-                          activeIcon: new Container(height: 5.0),
-                          icon: CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Theme.of(context).primaryColor,
-                            child: new Icon(
-                              Icons.home,
-                              color: Theme.of(context).shadowColor,
-                            ),
-                          )),
-                      BottomNavigationBarItem(
-                        label: '',
-                        icon: new Icon(
-                          Icons.fastfood,
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                        activeIcon: new Container(height: 0.0),
-                      ),
-                      BottomNavigationBarItem(
-                        label: '',
-                        icon: new Icon(
-                          Icons.favorite,
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                        activeIcon: new Container(height: 0.0),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            : WillPopScope(
-                onWillPop: Helper.of(context).onWillPop,
-                child: Scaffold(
-                  key: widget.scaffoldKey,
-                  drawer: DrawerWidget(),
-                  endDrawer: FilterWidget(onFilter: (filter) {
-                    Navigator.of(context).pushReplacementNamed('/Pages',
-                        arguments: widget.currentTab);
-                  }),
-                  body: widget.currentPage,
-                  bottomNavigationBar: BottomNavigationBar(
-                    type: BottomNavigationBarType.fixed,
-                    selectedItemColor: Theme.of(context).shadowColor,
-                    selectedFontSize: 0,
-                    unselectedFontSize: 0,
-                    iconSize: 22,
-                    elevation: 0,
-                    backgroundColor: Theme.of(context).hintColor,
-                    selectedIconTheme: IconThemeData(size: 28),
-                    unselectedItemColor:
-                        Theme.of(context).focusColor.withOpacity(1),
-                    currentIndex: widget.currentTab,
-                    onTap: (int i) {
-                      this._selectTab(i);
-                    },
-                    // this will be set when a new tab is tapped
-                    items: [
-                      BottomNavigationBarItem(
-                        label: '',
-                        icon: Icon(
-                          Icons.notifications,
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                        activeIcon: new Container(height: 0.0),
-                      ),
-                      BottomNavigationBarItem(
-                        label: '',
-                        icon: Icon(
-                          Icons.location_on,
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                        activeIcon: new Container(height: 0.0),
-                      ),
-                      BottomNavigationBarItem(
-                          label: '',
-                          activeIcon: new Container(height: 5.0),
-                          icon: CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Theme.of(context).primaryColor,
-                            child: new Icon(
-                              Icons.home,
-                              color: Theme.of(context).shadowColor,
-                            ),
-                          )),
-                      BottomNavigationBarItem(
-                        label: '',
-                        icon: new Icon(
-                          Icons.fastfood,
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                        activeIcon: new Container(height: 0.0),
-                      ),
-                      BottomNavigationBarItem(
-                        label: '',
-                        icon: new Icon(
-                          Icons.favorite,
-                          color: Theme.of(context).secondaryHeaderColor,
-                        ),
-                        activeIcon: new Container(height: 0.0),
-                      ),
-                    ],
-                  ),
-                ),
-              );
+            TabData(
+              iconData: PhosphorIcons.flag_banner_fill,
+              title: 'Find Stores',
+            ),
+            TabData(
+              iconData: PhosphorIcons.house_line_fill,
+              title: 'Home',
+            ),
+            TabData(
+              iconData: PhosphorIcons.storefront_fill,
+              title: 'Placed Orders',
+            ),
+            TabData(
+              iconData: PhosphorIcons.sparkle_fill,
+              title: 'Favorites',
+            ),
+          ],
+          onTabChangedListener: (int i) {
+            this._selectTab(i);
+          },
+          initialSelection: widget.currentTab,
+          activeIconColor: Theme.of(context).primaryColor,
+          circleColor: Theme.of(context).hintColor,
+          inactiveIconColor: Theme.of(context).splashColor.withOpacity(0.3),
+          barBackgroundColor: Theme.of(context).hintColor,
+          textColor: Theme.of(context).primaryColor,
+        ),
+      ),
+    );
   }
 }
