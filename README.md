@@ -69,8 +69,6 @@ Key areas the team are interested in developing include localizing the mobile ap
 ## Access our platform
 [Access Leaforg Frontend](http://14b5af1d-eu-de.lb.appdomain.cloud/)
 
-[                                                                                                                ]
-
 [Access Leaforg Backend](http://4f540fcd-eu-de.lb.appdomain.cloud/login/)
 Username: brayton@protonmail.com
 Password: 123456789
