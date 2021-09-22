@@ -62,6 +62,38 @@ Participation is welcomed from software developers, designers, testers, disposal
 
 Key areas the team are interested in developing include localizing the mobile app, improving the backend api service, updating project documentation, software, more in-depth research, and adding products data to the database.
 
+
+## Leaforg back-end with kubernetes files
+[Leaforg Backend Code 2021](https://github.com/brayton-anderson/Leaforg_Backend_Service/)
+
+## Access our platform
+[Access Leaforg Frontend](http://14b5af1d-eu-de.lb.appdomain.cloud/)
+
+[                                                                                                                ]
+
+[Access Leaforg Backend](http://4f540fcd-eu-de.lb.appdomain.cloud/login/)
+Username: brayton@protonmail.com
+Password: 123456789
+
+## IBM Products used upto now
+1. Virtual Private Endpoint for VPC
+2. Security Group for VPC
+3. Load Balancer for VPC (3)
+4. Block Storage for VPC (7)
+5. Virtual Private Cloud
+6. Virtual Server for VPC
+7. Security Group for VPC
+8. Kubernetes Service
+9. Container Registry
+10. API Gateway
+11. Watson Assistant
+12. Key Protect
+13. Certificate Manager
+14. Cloud Application
+15. Schematics
+16. Code Engine
+
+
 ## Contributors
 
 <a href="https://github.com/brayton-anderson/Leaforg-app/graphs/contributors">
