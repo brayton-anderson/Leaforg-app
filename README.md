@@ -63,7 +63,7 @@ Participation is welcomed from software developers, designers, testers, disposal
 Key areas the team are interested in developing include localizing the mobile app, improving the backend api service, updating project documentation, software, more in-depth research, and adding products data to the database.
 
 
-## Leaforg back-end with kubernetes files
+## Leaforg back-end with kubernetes files (Laravel <PHP>)
 [Leaforg Backend Code 2021](https://github.com/brayton-anderson/Leaforg_Backend_Service/)
 
 ## Access our platform
